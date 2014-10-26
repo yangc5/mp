@@ -19,10 +19,14 @@ class m141025_222531_create_template_place_table extends Migration
           'created_at' => Schema::TYPE_INTEGER . ' NOT NULL',
           'updated_at' => Schema::TYPE_INTEGER . ' NOT NULL',
       ], $tableOptions);
+      $this->addForeignKey('fk_template_place_template', '{{%template_place}}', 'template_id', '{{%template}}', 'id', 'CASCADE', 'CASCADE');        
+      $this->addForeignKey('fk_template_place_place', '{{%template_place}}', 'place_id', '{{%place}}', 'id', 'CASCADE', 'CASCADE');        
   }
 
   public function down()
   {
+    $this->dropForeignKey('fk_template_place_place', '{{%template_place}}');        
+    $this->dropForeignKey('fk_template_place_template', '{{%template_place}}');            
       $this->dropTable('{{%template_place}}');
   }
 }

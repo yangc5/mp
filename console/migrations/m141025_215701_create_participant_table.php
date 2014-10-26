@@ -21,16 +21,16 @@ class m141025_215701_create_participant_table extends Migration
           'created_at' => Schema::TYPE_INTEGER . ' NOT NULL',
           'updated_at' => Schema::TYPE_INTEGER . ' NOT NULL',
       ], $tableOptions);
-      $this->addForeignKey('fk_participant_meeting', $this->tableName, 'meeting_id', $this->tablePrefix.'meeting', 'id', 'CASCADE', 'CASCADE');
-      $this->addForeignKey('fk_participant_participant', $this->tableName, 'participant_id', $this->tablePrefix.'user', 'id', 'CASCADE', 'CASCADE');
-      $this->addForeignKey('fk_participant_invited_by', $this->tableName, 'invited_by', $this->tablePrefix.'user', 'id', 'CASCADE', 'CASCADE');      
+      $this->addForeignKey('fk_participant_meeting', '{{%participant}}', 'meeting_id', '{{%meeting}}', 'id', 'CASCADE', 'CASCADE');
+      $this->addForeignKey('fk_participant_participant', '{{%participant}}', 'participant_id', '{{%user}}', 'id', 'CASCADE', 'CASCADE');
+      $this->addForeignKey('fk_participant_invited_by', '{{%participant}}', 'invited_by', '{{%user}}', 'id', 'CASCADE', 'CASCADE');      
   }
 
   public function down()
   {
-	  $this->dropForeignKey('fk_participant_invited_by', $this->tableName);
-	  $this->dropForeignKey('fk_participant_participant', $this->tableName);
-	  $this->dropForeignKey('fk_participant_meeting', $this->tableName);    
+	  $this->dropForeignKey('fk_participant_invited_by', '{{%participant}}');
+	  $this->dropForeignKey('fk_participant_participant', '{{%participant}}');
+	  $this->dropForeignKey('fk_participant_meeting', '{{%participant}}');    
       $this->dropTable('{{%participant}}');
   }
 }

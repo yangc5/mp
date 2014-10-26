@@ -21,12 +21,15 @@ class m141025_221627_create_meeting_note_table extends Migration
           'created_at' => Schema::TYPE_INTEGER . ' NOT NULL',
           'updated_at' => Schema::TYPE_INTEGER . ' NOT NULL',
       ], $tableOptions);
-      $this->addForeignKey('fk_meeting_note_meeting', $this->tableName, 'meeting_id', $this->tablePrefix.'meeting', 'id', 'CASCADE', 'CASCADE');
+      $this->addForeignKey('fk_meeting_note_meeting', '{{%meeting_note}}', 'meeting_id', '{{%meeting}}', 'id', 'CASCADE', 'CASCADE');
+      $this->addForeignKey('fk_meeting_note_posted_by', '{{%meeting_note}}', 'posted_by', '{{%user}}', 'id', 'CASCADE', 'CASCADE');     
+
   }
 
   public function down()
   {
-      $this->dropForeignKey('fk_meeting_note_meeting', $this->tableName);    
+      $this->dropForeignKey('fk_meeting_note_posted_by', '{{%meeting_note}}');    
+      $this->dropForeignKey('fk_meeting_note_meeting', '{{%meeting_note}}');    
       $this->dropTable('{{%meeting_note}}');
   }
 }

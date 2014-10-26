@@ -15,7 +15,7 @@ class m141025_220923_create_user_place_table extends Migration
       $this->createTable('{{%user_place}}', [
           'id' => Schema::TYPE_PK,
           'user_id' => Schema::TYPE_BIGINT.' NOT NULL',
-          'place_id' => Schema::TYPE_BIGINT.' NOT NULL',
+          'place_id' => Schema::TYPE_INTEGER.' NOT NULL',
           'is_favorite' => Schema::TYPE_SMALLINT . ' NOT NULL DEFAULT 0',
           'number_meetings' => Schema::TYPE_INTEGER . ' NOT NULL DEFAULT 0',
           'is_special' => Schema::TYPE_SMALLINT . ' NOT NULL DEFAULT 0',
@@ -24,10 +24,14 @@ class m141025_220923_create_user_place_table extends Migration
           'created_at' => Schema::TYPE_INTEGER . ' NOT NULL',
           'updated_at' => Schema::TYPE_INTEGER . ' NOT NULL',
       ], $tableOptions);
+      $this->addForeignKey('fk_user_place_user', '{{%user_place}}', 'user_id', '{{%user}}', 'id', 'CASCADE', 'CASCADE');     
+      $this->addForeignKey('fk_user_place_place', '{{%user_place}}', 'place_id', '{{%place}}', 'id', 'CASCADE', 'CASCADE');     
   }
 
   public function down()
   {
+    $this->dropForeignKey('fk_user_place_place', '{{%user_place}}');    
+    $this->dropForeignKey('fk_user_place_user', '{{%user_place}}');            
       $this->dropTable('{{%user_place}}');
   }
 }

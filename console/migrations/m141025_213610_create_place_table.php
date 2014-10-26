@@ -15,21 +15,20 @@ class m141025_213610_create_place_table extends Migration
       $this->createTable('{{%place}}', [
           'id' => Schema::TYPE_PK,
           'name' => Schema::TYPE_STRING.' NOT NULL',          
-          'type' => Schema::TYPE_SMALLINT.' NOT NULL DEFAULT 0',
+          'place_type' => Schema::TYPE_SMALLINT.' NOT NULL DEFAULT 0',
           'status' => Schema::TYPE_SMALLINT . ' NOT NULL DEFAULT 0',
-          'is_private' => Schema::TYPE_SMALLINT . ' NOT NULL DEFAULT 0',
-          'gps'=>'POINT NOT NULL',
           'ext_id' => Schema::TYPE_STRING.' NOT NULL', // e.g. google places id
           'ext_reference' => Schema::TYPE_TEXT, // e.g. google places reference                   
+          'created_by' => Schema::TYPE_BIGINT.' NOT NULL',
           'created_at' => Schema::TYPE_INTEGER . ' NOT NULL',
           'updated_at' => Schema::TYPE_INTEGER . ' NOT NULL',
       ], $tableOptions);
-      $this->execute('create spatial index place_gps on '.$this->tablePrefix.'place(gps);');
+      $this->addForeignKey('fk_place_created_by', '{{%place}}', 'created_by', '{{%user}}', 'id', 'CASCADE', 'CASCADE');
   }
 
   public function down()
   {
-    $this->dropIndex('place_gps', $this->tableName);	  
+    $this->dropForeignKey('fk_place_created_by', '{{%place}}');    
       $this->dropTable('{{%place}}');
   }
 }

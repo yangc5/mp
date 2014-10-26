@@ -21,13 +21,16 @@ class m141025_220016_create_meeting_place_table extends Migration
           'created_at' => Schema::TYPE_INTEGER . ' NOT NULL',
           'updated_at' => Schema::TYPE_INTEGER . ' NOT NULL',
       ], $tableOptions);
-      $this->addForeignKey('fk_meeting_place_meeting', $this->tableName, 'meeting_id', $this->tablePrefix.'meeting', 'id', 'CASCADE', 'CASCADE');
+      $this->addForeignKey('fk_meeting_place_meeting', '{{%meeting_place}}', 'meeting_id', '{{%meeting}}', 'id', 'CASCADE', 'CASCADE');
+      $this->addForeignKey('fk_meeting_place_place', '{{%meeting_place}}', 'place_id', '{{%place}}', 'id', 'CASCADE', 'CASCADE');
+      $this->addForeignKey('fk_meeting_suggested_by', '{{%meeting_place}}', 'suggested_by', '{{%user}}', 'id', 'CASCADE', 'CASCADE');     
 
   }
 
   public function down()
   {
-      $this->dropForeignKey('fk_meeting_place_meeting', $this->tableName);    
+    $this->dropForeignKey('fk_meeting_suggested_by', '{{%meeting_place}}');
+      $this->dropForeignKey('fk_meeting_place_meeting', '{{%meeting_place}}');    
       $this->dropTable('{{%meeting_place}}');
   }
 }
