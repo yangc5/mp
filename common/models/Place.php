@@ -1,11 +1,11 @@
 <?php
 
-namespace frontend\models;
+namespace common\models;
 
 use Yii;
 
 /**
- * This is the model class for table "Place".
+ * This is the model class for table "place".
  *
  * @property integer $id
  * @property string $name
@@ -29,7 +29,7 @@ class Place extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'Place';
+        return 'place';
     }
 
     /**
@@ -51,15 +51,15 @@ class Place extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'name' => 'Name',
-            'place_type' => 'Place Type',
-            'status' => 'Status',
-            'ext_id' => 'Ext ID',
-            'ext_reference' => 'Ext Reference',
-            'created_by' => 'Created By',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
+            'id' => Yii::t('frontend', 'ID'),
+            'name' => Yii::t('frontend', 'Name'),
+            'place_type' => Yii::t('frontend', 'Place Type'),
+            'status' => Yii::t('frontend', 'Status'),
+            'ext_id' => Yii::t('frontend', 'Ext ID'),
+            'ext_reference' => Yii::t('frontend', 'Ext Reference'),
+            'created_by' => Yii::t('frontend', 'Created By'),
+            'created_at' => Yii::t('frontend', 'Created At'),
+            'updated_at' => Yii::t('frontend', 'Updated At'),
         ];
     }
 

@@ -4,7 +4,7 @@ use yii\helpers\Html;
 
 
 /* @var $this yii\web\View */
-/* @var $model frontend\models\Meeting */
+/* @var $model common\models\Meeting */
 
 $this->title = 'Create Meeting';
 $this->params['breadcrumbs'][] = ['label' => 'Meetings', 'url' => ['index']];
