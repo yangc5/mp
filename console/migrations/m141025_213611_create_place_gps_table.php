@@ -3,7 +3,7 @@
 use yii\db\Schema;
 use yii\db\Migration;
 
-class m141026_002449_create_place_gps_table extends Migration
+class m141025_213611_create_place_gps_table extends Migration
 {
   public function up()
   {

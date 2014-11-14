@@ -26,7 +26,7 @@ class m141025_212656_create_meeting_table extends Migration
 
     public function down()
     {
- 	  	  $this->dropForeignKey('fk_meeting_owner', '{{%meeting}}');
+ 	  	$this->dropForeignKey('fk_meeting_owner', '{{%meeting}}');
         $this->dropTable('{{%meeting}}');
     }
 }
