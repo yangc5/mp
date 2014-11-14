@@ -5,14 +5,13 @@ namespace common\models;
 use Yii;
 
 /**
- * This is the model class for table "place".
+ * This is the model class for table "{{%place}}".
  *
  * @property integer $id
  * @property string $name
  * @property integer $place_type
  * @property integer $status
- * @property string $ext_id
- * @property string $ext_reference
+ * @property string $google_place_id
  * @property integer $created_by
  * @property integer $created_at
  * @property integer $updated_at
@@ -29,7 +28,7 @@ class Place extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'place';
+        return '{{%place}}';
     }
 
     /**
@@ -38,10 +37,9 @@ class Place extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'ext_id', 'created_by', 'created_at', 'updated_at'], 'required'],
+            [['name', 'google_place_id', 'created_by', 'created_at', 'updated_at'], 'required'],
             [['place_type', 'status', 'created_by', 'created_at', 'updated_at'], 'integer'],
-            [['ext_reference'], 'string'],
-            [['name', 'ext_id'], 'string', 'max' => 255]
+            [['name', 'google_place_id'], 'string', 'max' => 255]
         ];
     }
 
@@ -51,15 +49,14 @@ class Place extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('frontend', 'ID'),
-            'name' => Yii::t('frontend', 'Name'),
-            'place_type' => Yii::t('frontend', 'Place Type'),
-            'status' => Yii::t('frontend', 'Status'),
-            'ext_id' => Yii::t('frontend', 'Ext ID'),
-            'ext_reference' => Yii::t('frontend', 'Ext Reference'),
-            'created_by' => Yii::t('frontend', 'Created By'),
-            'created_at' => Yii::t('frontend', 'Created At'),
-            'updated_at' => Yii::t('frontend', 'Updated At'),
+            'id' => Yii::t('common', 'ID'),
+            'name' => Yii::t('common', 'Name'),
+            'place_type' => Yii::t('common', 'Place Type'),
+            'status' => Yii::t('common', 'Status'),
+            'google_place_id' => Yii::t('common', 'Google Place ID'),
+            'created_by' => Yii::t('common', 'Created By'),
+            'created_at' => Yii::t('common', 'Created At'),
+            'updated_at' => Yii::t('common', 'Updated At'),
         ];
     }
 

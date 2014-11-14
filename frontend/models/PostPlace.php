@@ -8,9 +8,9 @@ use yii\data\ActiveDataProvider;
 use frontend\models\Place;
 
 /**
- * PlaceSearch represents the model behind the search form about `frontend\models\Place`.
+ * PostPlace represents the model behind the search form about `frontend\models\Place`.
  */
-class PlaceSearch extends Place
+class PostPlace extends Place
 {
     /**
      * @inheritdoc
@@ -19,7 +19,7 @@ class PlaceSearch extends Place
     {
         return [
             [['id', 'place_type', 'status', 'created_by', 'created_at', 'updated_at'], 'integer'],
-            [['name', 'ext_id', 'ext_reference'], 'safe'],
+            [['name', 'google_place_id'], 'safe'],
         ];
     }
 
@@ -61,8 +61,7 @@ class PlaceSearch extends Place
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'ext_id', $this->ext_id])
-            ->andFilterWhere(['like', 'ext_reference', $this->ext_reference]);
+            ->andFilterWhere(['like', 'google_place_id', $this->google_place_id]);
 
         return $dataProvider;
     }

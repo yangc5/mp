@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model frontend\models\PlaceSearch */
+/* @var $model frontend\models\PostPlace */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
@@ -23,9 +23,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'status') ?>
 
-    <?= $form->field($model, 'ext_id') ?>
-
-    <?php // echo $form->field($model, 'ext_reference') ?>
+    <?= $form->field($model, 'google_place_id') ?>
 
     <?php // echo $form->field($model, 'created_by') ?>
 

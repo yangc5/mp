@@ -18,9 +18,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'status')->textInput() ?>
 
-    <?= $form->field($model, 'ext_id')->textInput(['maxlength' => 255]) ?>
-
-    <?= $form->field($model, 'ext_reference')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'google_place_id')->textInput(['maxlength' => 255]) ?>
 
     <?= $form->field($model, 'created_by')->textInput() ?>
 

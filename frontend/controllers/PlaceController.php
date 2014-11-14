@@ -4,7 +4,7 @@ namespace frontend\controllers;
 
 use Yii;
 use frontend\models\Place;
-use frontend\models\PlaceSearch;
+use frontend\models\PostPlace;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -32,7 +32,7 @@ class PlaceController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new PlaceSearch();
+        $searchModel = new PostPlace();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [

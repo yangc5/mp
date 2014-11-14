@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel frontend\models\PlaceSearch */
+/* @var $searchModel frontend\models\PostPlace */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'Places';
@@ -29,8 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'name',
             'place_type',
             'status',
-            'ext_id',
-            // 'ext_reference:ntext',
+            'google_place_id',
             // 'created_by',
             // 'created_at',
             // 'updated_at',
