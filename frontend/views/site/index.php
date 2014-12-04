@@ -9,7 +9,7 @@ $this->title = 'Meeting Planner';
 
         <p class="lead">A new app to make scheduling as simple as it should be.</p>
 
-        <p><a class="btn btn-lg btn-success" href="./about">Learn more</a></p>
+        <p><a class="btn btn-lg btn-success" href="/site/about">Learn more</a></p>
     </div>
 
     <div class="body-content">
