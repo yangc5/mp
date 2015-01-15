@@ -14,17 +14,21 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => 255]) ?>
 
-    <?= $form->field($model, 'place_type')->textInput() ?>
+    <? //= $form->field($model, 'slug')->textInput(['maxlength' => 255]) ?>
 
-    <?= $form->field($model, 'status')->textInput() ?>
+    <?= $form->field($model, 'full_address')->textInput(['maxlength' => 255]) ?>
 
-    <?= $form->field($model, 'google_place_id')->textInput(['maxlength' => 255]) ?>
+    <?= $form->field($model, 'website')->textInput(['maxlength' => 255]) ?>
 
-    <?= $form->field($model, 'created_by')->textInput() ?>
+    <?// = $form->field($model, 'vicinity')->textInput(['maxlength' => 255]) ?>
 
-    <?= $form->field($model, 'created_at')->textInput() ?>
-
-    <?= $form->field($model, 'updated_at')->textInput() ?>
+    <?= $form->field($model, 'place_type')
+            ->dropDownList(
+                $model->getPlaceTypeOptions(),   
+                ['prompt'=>'What type of place is this?'] 
+            ) ?>
+            
+    <?= $form->field($model, 'notes')->textArea() ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

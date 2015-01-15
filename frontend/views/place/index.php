@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel frontend\models\PostPlace */
+/* @var $searchModel frontend\models\PlaceSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'Places';
@@ -16,7 +16,9 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Place', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Add Place', ['create'], ['class' => 'btn btn-success']) ?> 
+        <?= Html::a('Add Current Location', ['create_geo'], ['class' => 'btn btn-success']) ?> 
+        <?= Html::a('Add a Google Place', ['create_place_google'], ['class' => 'btn btn-success']) ?> 
     </p>
 
     <?= GridView::widget([
@@ -24,16 +26,14 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
             'name',
-            'place_type',
-            'status',
-            'google_place_id',
-            // 'created_by',
-            // 'created_at',
-            // 'updated_at',
-
+            [
+                'attribute' => 'place_type',
+                'format' => 'raw',
+                'value' => function ($model) {                      
+                            return '<div>'.$model->getPlaceType($model->place_type).'</div>';
+                    },
+            ],
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>

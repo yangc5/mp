@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model frontend\models\PostPlace */
+/* @var $model frontend\models\PlaceSearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
@@ -30,6 +30,14 @@ use yii\widgets\ActiveForm;
     <?php // echo $form->field($model, 'created_at') ?>
 
     <?php // echo $form->field($model, 'updated_at') ?>
+
+    <?php // echo $form->field($model, 'slug') ?>
+
+    <?php // echo $form->field($model, 'website') ?>
+
+    <?php // echo $form->field($model, 'full_address') ?>
+
+    <?php // echo $form->field($model, 'vicinity') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>

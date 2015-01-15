@@ -4,10 +4,11 @@ namespace frontend\controllers;
 
 use Yii;
 use frontend\models\Place;
-use frontend\models\PostPlace;
+use frontend\models\PlaceSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\User;
 
 /**
  * PlaceController implements the CRUD actions for Place model.
@@ -32,7 +33,7 @@ class PlaceController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new PostPlace();
+        $searchModel = new PlaceSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -60,9 +61,14 @@ class PlaceController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Place();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        $model = new Place();        
+        if ($model->load(Yii::$app->request->post())) {
+            if (Yii::$app->user->getIsGuest()) {
+              $model->created_by = 1;
+            } else {
+              $model->created_by= Yii::$app->user->getId();
+            }
+            $model->save();
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
@@ -118,4 +124,71 @@ class PlaceController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+    
+    /**
+      * Creates a new Place model from Google Place
+      * If creation is successful, the browser will be redirected to the 'view' page.
+      * @return mixed
+      */
+     public function actionCreate_place_google()
+     {
+       $model = new Place();        
+       if ($model->load(Yii::$app->request->post())) {
+           if (Yii::$app->user->getIsGuest()) {
+             $model->created_by = 1;
+           } else {
+             $model->created_by= Yii::$app->user->getId();
+           }
+           $form = Yii::$app->request->post();
+           $model->save();
+           // add GPS entry in PlaceGeometry
+           $model->addGeometry($model,$form['Place']['location']);
+           // var_dump(json_decode($pst['Place']['location'],true));
+           return $this->redirect(['view', 'id' => $model->id]);
+       } else {
+           return $this->render('create_place_google', [
+               'model' => $model,
+           ]);
+       }
+
+         $model = new Place();
+
+         if ($model->load(Yii::$app->request->post())) {
+           // && $model->save()) {
+             die();
+             return $this->redirect(['view', 'id' => $model->id]);
+         } else {
+             return $this->render('create_place_google', [
+                 'model' => $model,
+             ]);
+         }
+     }    
+
+     /**
+      * Creates a new Place model via Geolocation
+      */
+     public function actionCreate_geo()
+     {
+         $model = new Place();
+
+         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+             return $this->redirect(['view', 'id' => $model->id]);
+         } else {
+             return $this->render('create_geo', [
+                 'model' => $model,
+             ]);
+         }
+     }  
+
+     public function actionLocate()
+     {
+         $searchModel = new PostPlace();
+         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+         return $this->render('locate', [
+             'searchModel' => $searchModel,
+             'dataProvider' => $dataProvider,
+         ]);
+     }
+    
 }

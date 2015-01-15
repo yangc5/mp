@@ -5,12 +5,12 @@ namespace frontend\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use frontend\models\Meeting;
+use frontend\models\Place;
 
 /**
- * PostMeeting represents the model behind the search form about `frontend\models\Meeting`.
+ * PlaceSearch represents the model behind the search form about `frontend\models\Place`.
  */
-class PostMeeting extends Meeting
+class PlaceSearch extends Place
 {
     /**
      * @inheritdoc
@@ -18,8 +18,8 @@ class PostMeeting extends Meeting
     public function rules()
     {
         return [
-            [['id', 'owner_id', 'meeting_type', 'status', 'created_at', 'updated_at'], 'integer'],
-            [['message'], 'safe'],
+            [['id', 'place_type', 'status', 'created_by', 'created_at', 'updated_at'], 'integer'],
+            [['name', 'google_place_id', 'slug', 'website', 'full_address', 'vicinity'], 'safe'],
         ];
     }
 
@@ -41,7 +41,7 @@ class PostMeeting extends Meeting
      */
     public function search($params)
     {
-        $query = Meeting::find();
+        $query = Place::find();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -53,14 +53,19 @@ class PostMeeting extends Meeting
 
         $query->andFilterWhere([
             'id' => $this->id,
-            'owner_id' => $this->owner_id,
-            'meeting_type' => $this->meeting_type,
+            'place_type' => $this->place_type,
             'status' => $this->status,
+            'created_by' => $this->created_by,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ]);
 
-        $query->andFilterWhere(['like', 'message', $this->message]);
+        $query->andFilterWhere(['like', 'name', $this->name])
+            ->andFilterWhere(['like', 'google_place_id', $this->google_place_id])
+            ->andFilterWhere(['like', 'slug', $this->slug])
+            ->andFilterWhere(['like', 'website', $this->website])
+            ->andFilterWhere(['like', 'full_address', $this->full_address])
+            ->andFilterWhere(['like', 'vicinity', $this->vicinity]);
 
         return $dataProvider;
     }
