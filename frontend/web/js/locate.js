@@ -55,6 +55,6 @@ function errorHandler(err) {
   s.innerHTML = typeof msg == 'string' ? msg : "failed";
   s.className = 'fail';  
   //if (err.code == 1) {} // user said no! 
-  document.location.href='/userlocation/update?errorLocate';
+  document.location.href='/place/index?errorLocate';
 }
 
