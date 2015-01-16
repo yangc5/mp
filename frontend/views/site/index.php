@@ -27,14 +27,14 @@ $this->title = 'Meeting Planner';
 
                 <p>In Episode 2, we scope out the features that we'll need for a minimum viable product and the database schema that will support it.</p>
 
-                <p><a class="btn btn-default" href="http://code.tutsplus.com/tutorials/building-your-startup-with-php-feature-requirements-and-database-design--cms-22618">Episode 2 - Coming Jan 16 &raquo;</a></p>
+                <p><a class="btn btn-default" href="http://code.tutsplus.com/tutorials/building-your-startup-with-php-feature-requirements-and-database-design--cms-22618">Episode 2 &raquo;</a></p>
             </div>
             <div class="col-lg-4">
                 <h2>Building Places</h2>
 
                 <p>In Episode 3, we build code to enable meeting places, integrating with HTML 5 Geolocation, Google Maps and Google Places.</p>
 
-                <p><a class="btn btn-default" href="#">TBD</a></p>
+                <p><a class="btn btn-default" href="#">Coming soon</a></p>
             </div>
         </div>
 

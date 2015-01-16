@@ -29,7 +29,6 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="col-md-6">
 <div class="place-view">
 
-
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [

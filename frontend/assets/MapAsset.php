@@ -12,7 +12,6 @@ class MapAsset extends AssetBundle
     ];
     public $js = [
       'js/create_place.js',
-//      'js/create_slug.js',
     ];
     public $depends = [
     ];

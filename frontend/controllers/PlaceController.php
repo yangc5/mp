@@ -65,20 +65,24 @@ class PlaceController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Place();        
+        $model = new Place();       
         if ($model->load(Yii::$app->request->post())) {
-            $gc = new GeocodingClient();
-            $result = $gc->lookup(array('address'=>'700 North 67th Street, Seattle, Wa. 98103','components'=>1));
-            // tbd - check if the coordinates exist
-            var_dump($result['results'][0]['geometry']['location']); // 
-            die();
-            
+			$form = Yii::$app->request->post();
             if (Yii::$app->user->getIsGuest()) {
               $model->created_by = 1;
             } else {
               $model->created_by= Yii::$app->user->getId();
             }
             $model->save();
+            $gc = new GeocodingClient();
+            $result = $gc->lookup(array('address'=>$form['Place']['full_address'],'components'=>1));
+			$location = $result['results'][0]['geometry']['location'];
+            if (!is_null($location)) {
+				$lat = $location['lat'];
+				$lng = $location['lng'];
+             // add GPS entry in PlaceGeometry
+             $model->addGeometryByPoint($model,$lat,$lng);
+			}            
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
@@ -153,25 +157,12 @@ class PlaceController extends Controller
            $model->save();
            // add GPS entry in PlaceGeometry
            $model->addGeometry($model,$form['Place']['location']);
-           // var_dump(json_decode($pst['Place']['location'],true));
            return $this->redirect(['view', 'id' => $model->id]);
        } else {
            return $this->render('create_place_google', [
                'model' => $model,
            ]);
        }
-
-         $model = new Place();
-
-         if ($model->load(Yii::$app->request->post())) {
-           // && $model->save()) {
-             die();
-             return $this->redirect(['view', 'id' => $model->id]);
-         } else {
-             return $this->render('create_place_google', [
-                 'model' => $model,
-             ]);
-         }
      }    
 
      /**

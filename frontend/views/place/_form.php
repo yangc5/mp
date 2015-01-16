@@ -14,13 +14,9 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => 255]) ?>
 
-    <? //= $form->field($model, 'slug')->textInput(['maxlength' => 255]) ?>
-
     <?= $form->field($model, 'full_address')->textInput(['maxlength' => 255])->label('Address') ?>
 
     <?= $form->field($model, 'website')->textInput(['maxlength' => 255]) ?>
-
-    <?// = $form->field($model, 'vicinity')->textInput(['maxlength' => 255]) ?>
 
     <?= $form->field($model, 'place_type')
             ->dropDownList(
