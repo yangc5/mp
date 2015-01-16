@@ -11,6 +11,7 @@ MapAsset::register($this);
 /* @var $model frontend\models\Place */
 /* @var $form yii\widgets\ActiveForm */
 ?>
+<div class="col-md-6">
 
 <div class="placegoogle-form">
   <p>Type in a place or business known to Google Places:</p>
@@ -25,37 +26,11 @@ MapAsset::register($this);
     <?= BaseHtml::activeHiddenInput($model, 'vicinity'); ?>
     <?= BaseHtml::activeHiddenInput($model, 'full_address'); ?>
 
-    
-    <?php
-    //lg('bl'.$bound_bl);
-    //lg('tr'.$bound_tr);
-    /*$this->widget('ext.gplacesautocomplete.GPlacesAutoComplete', array(
-        'htmlOptions' => array ('class'=>'span5'),
-         'name' => 'searchbox',
-         'afterScript' => 'setupBounds('.$bound_bl.','.$bound_tr.');setupListeners();',
-         'options' => array(
-            'types' => array(
-               'establishment'
-            ),
-            'componentRestrictions' => array(
-               'country' => 'us',
-             )
-         )
-      ));*/
-
-/*
-      $form->field($model, 'title')->hiddenInput();
-      $form->field($model, 'ext_id')->hiddenInput();
-      $form->field($model, 'ext_reference')->hiddenInput();
-      $form->field($model, 'website')->hiddenInput();
-      $form->field($model, 'full_address')->hiddenInput();
-      $form->field($model, 'vicinity')->hiddenInput();
-      */
-    ?>
-
-    <?php //echo $form->textFieldRow($model,'slug',array('class'=>'span5','maxlength'=>255)); ?>
-
-    <? // $form->field($model, 'name')->textInput(['maxlength' => 255]) ?>
+    <?= $form->field($model, 'place_type')
+            ->dropDownList(
+                $model->getPlaceTypeOptions(),   
+                ['prompt'=>'What type of place is this?'] 
+            )->label('Type of Place') ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
@@ -64,9 +39,9 @@ MapAsset::register($this);
     <?php ActiveForm::end(); ?>
 
 </div>
-
-           <div id="map-canvas">
-<?php
-//  $gMap->renderMap();  
-?>            
-           </div>
+</div> <!-- end col1 -->
+<div class="col-md-6">
+<div id="map-canvas">
+  <article></article>
+</div>
+</div> <!-- end col2 -->

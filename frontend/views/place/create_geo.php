@@ -6,7 +6,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model frontend\models\Place */
 
-$this->title = 'Create Place';
+$this->title = 'Create Place By Geolocation';
 $this->params['breadcrumbs'][] = ['label' => 'Places', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

@@ -40,6 +40,8 @@ class Place extends \yii\db\ActiveRecord
     
     public $searchbox;
     public $location;
+    public $lat;
+    public $lng;
     
     /**
      * @inheritdoc
@@ -152,6 +154,13 @@ class Place extends \yii\db\ActiveRecord
             self::TYPE_OTHER => 'Other'
          );
      }		
+
+     public function addGeometryByPoint($model,$lat,$lon) {
+         $pg = new PlaceGPS;
+         $pg->place_id=$model->id;
+         $pg->gps = new \yii\db\Expression("GeomFromText('Point(".$lat." ".$lon.")')");
+         $pg->save();    
+     }
     
     public function addGeometry($model,$location) {
     		$x = json_decode($location,true);
@@ -162,8 +171,73 @@ class Place extends \yii\db\ActiveRecord
         $pg->place_id=$model->id;
         $pg->gps = new \yii\db\Expression("GeomFromText('Point(".$lat." ".$lon.")')");
         $pg->save();    
-        var_dump($pg->getErrors());
-        die();
+    }
+    
+    public function getLocation($place_id) {
+      $sql = 'Select AsText(gps) as gps from {{%place_gps}} where place_id = '.$place_id;
+      $model = PlaceGPS::findBySql($sql)->one();
+      $gps = new \stdClass;
+      if (is_null($model)) {
+        return false;
+      } else {
+        list($gps->lat, $gps->lng) = $this->string_to_lat_lon($model->gps);        
+      }
+      return $gps;
+    }
+    
+    public function getMap($gps) {
+      $coord = new LatLng(['lat' => $gps->lat, 'lng' => $gps->lng]);
+/*      $map = new Map([
+          'center' => $coord,
+          'zoom' => 14,
+      ]);
+      return $map;*/
+    }
+    
+    public function prepareMap($id, $size='medium') {
+      if ($pg===false) {
+        // missing place_geometry 
+        // TO DO: Fix this later
+        return false;
+      }
+      $center = new stdClass;
+      Yii::import('ext.gmap.*');
+      $gMap = new EGMap();
+      $gMap->setJsName('map_region');
+      switch ($size) {
+        case 'small':
+          $gMap->width = '200';
+          $gMap->height = '200';      
+          $gMap->zoom = 13;
+          $gMap->mapTypeControl= false;
+        break;
+        default:
+          $gMap->width = '300';
+          $gMap->height = '300';
+          $gMap->zoom = 13;      
+      }
+      $gMap->setCenter($center->lat, $center->lon);
+      $coords = PlaceGeometry::model()->string_to_coords($pg['region']);
+
+      if (count($coords)>1) {
+        $polygon = new EGMapPolygon($coords);
+        $gMap->addPolygon($polygon);	            
+      } else {
+        // Create marker with label
+        $marker = new EGMapMarkerWithLabel($center->lat,$center->lon, array('title' => 'Here!'));
+        $gMap->addMarker($marker);          
+      }
+      return $gMap;
+    }    
+    
+    // Geometry Helper Functions
+
+    // takes text POINT(x,y) returns array with x and y
+  	public function string_to_lat_lon($string) {
+        $string = str_replace('POINT', '', $string); // remove POINT
+        $string = str_replace('(', '', $string); // remove leading bracket
+        $string = str_replace(')', '', $string); // remove trailing bracket
+        return explode(' ', $string);
     }
     
 }

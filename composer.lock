@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "2amigos/yii2-google-maps-library",
-            "version": "0.1.1",
+            "version": "0.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/2amigos/yii2-google-maps-library.git",
-                "reference": "8f8ed1e1528a32d2992778cd1062c1347039e901"
+                "reference": "bfaed9b5088da23699259237fcafaf58f60f062a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/2amigos/yii2-google-maps-library/zipball/8f8ed1e1528a32d2992778cd1062c1347039e901",
-                "reference": "8f8ed1e1528a32d2992778cd1062c1347039e901",
+                "url": "https://api.github.com/repos/2amigos/yii2-google-maps-library/zipball/bfaed9b5088da23699259237fcafaf58f60f062a",
+                "reference": "bfaed9b5088da23699259237fcafaf58f60f062a",
                 "shasum": ""
             },
             "require": {
@@ -54,7 +54,7 @@
                 "maps",
                 "yii"
             ],
-            "time": "2014-10-17 11:44:03"
+            "time": "2014-12-09 19:44:21"
         },
         {
             "name": "2amigos/yii2-google-places-library",

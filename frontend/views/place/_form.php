@@ -16,7 +16,7 @@ use yii\widgets\ActiveForm;
 
     <? //= $form->field($model, 'slug')->textInput(['maxlength' => 255]) ?>
 
-    <?= $form->field($model, 'full_address')->textInput(['maxlength' => 255]) ?>
+    <?= $form->field($model, 'full_address')->textInput(['maxlength' => 255])->label('Address') ?>
 
     <?= $form->field($model, 'website')->textInput(['maxlength' => 255]) ?>
 
@@ -26,7 +26,7 @@ use yii\widgets\ActiveForm;
             ->dropDownList(
                 $model->getPlaceTypeOptions(),   
                 ['prompt'=>'What type of place is this?'] 
-            ) ?>
+            )->label('Type of Place') ?>
             
     <?= $form->field($model, 'notes')->textArea() ?>
 

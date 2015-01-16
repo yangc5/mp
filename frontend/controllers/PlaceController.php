@@ -9,6 +9,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\web\User;
+use dosamigos\google\maps\services\GeocodingClient;
 
 /**
  * PlaceController implements the CRUD actions for Place model.
@@ -48,9 +49,12 @@ class PlaceController extends Controller
      * @return mixed
      */
     public function actionView($id)
-    {
+    { 
+        $model = $this->findModel($id);
+        $gps = $model->getLocation($id);
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $model,
+            'gps'=> $gps,
         ]);
     }
 
@@ -63,6 +67,12 @@ class PlaceController extends Controller
     {
         $model = new Place();        
         if ($model->load(Yii::$app->request->post())) {
+            $gc = new GeocodingClient();
+            $result = $gc->lookup(array('address'=>'700 North 67th Street, Seattle, Wa. 98103','components'=>1));
+            // tbd - check if the coordinates exist
+            var_dump($result['results'][0]['geometry']['location']); // 
+            die();
+            
             if (Yii::$app->user->getIsGuest()) {
               $model->created_by = 1;
             } else {
@@ -170,8 +180,16 @@ class PlaceController extends Controller
      public function actionCreate_geo()
      {
          $model = new Place();
-
-         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+         if ($model->load(Yii::$app->request->post())) {
+             if (Yii::$app->user->getIsGuest()) {
+               $model->created_by = 1;
+             } else {
+               $model->created_by= Yii::$app->user->getId();
+             }
+             $form = Yii::$app->request->post();
+             $model->save();
+             // add GPS entry in PlaceGeometry
+             $model->addGeometryByPoint($model,$form['Place']['lat'],$form['Place']['lng']);
              return $this->redirect(['view', 'id' => $model->id]);
          } else {
              return $this->render('create_geo', [

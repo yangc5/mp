@@ -46,8 +46,8 @@ function success(position) {
       title:"You are here! (at least within a "+position.coords.accuracy+" meter radius)"
   });
   $('#locate_actionbar').removeClass('hidden');
-  $('#UserLocation_lat').val(position.coords.latitude);
-  $('#UserLocation_lon').val(position.coords.longitude);
+  $('#place-lat').val(position.coords.latitude);
+  $('#place-lng').val(position.coords.longitude);
 }
 
 function errorHandler(err) {
