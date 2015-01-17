@@ -90,19 +90,19 @@ class Place extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'name' => 'Name',
-            'place_type' => 'Place Type',
-            'status' => 'Status',
-            'google_place_id' => 'Google Place ID',
-            'created_by' => 'Created By',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
-            'slug' => 'Slug',
-            'website' => 'Website',
-            'full_address' => 'Full Address',
-            'vicinity' => 'Vicinity',
-            'notes'=> 'Notes',
+          'id' => Yii::t('frontend', 'ID'),
+           'name' => Yii::t('frontend', 'Name'),
+           'place_type' => Yii::t('frontend', 'Place Type'),
+           'status' => Yii::t('frontend', 'Status'),
+           'google_place_id' => Yii::t('frontend', 'Google Place ID'),
+           'created_by' => Yii::t('frontend', 'Created By'),
+           'created_at' => Yii::t('frontend', 'Created At'),
+           'updated_at' => Yii::t('frontend', 'Updated At'),
+           'slug' => Yii::t('frontend', 'Slug'),
+           'website' => Yii::t('frontend', 'Website'),
+           'full_address' => Yii::t('frontend', 'Full Address'),
+           'vicinity' => Yii::t('frontend', 'Vicinity'),
+           'notes' => Yii::t('frontend', 'Notes'),
         ];
     }
 

@@ -5,10 +5,12 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model frontend\models\Place */
 
-$this->title = 'Update Place: ' . ' ' . $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Places', 'url' => ['index']];
+$this->title = Yii::t('frontend', 'Update {modelClass}: ', [
+    'modelClass' => 'Place',
+]) . ' ' . $model->name;
+$this->params['breadcrumbs'][] = ['label' => Yii::t('frontend', 'Places'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = Yii::t('frontend', 'Update');
 ?>
 <div class="place-update">
 

@@ -19,7 +19,7 @@ class PlaceSearch extends Place
     {
         return [
             [['id', 'place_type', 'status', 'created_by', 'created_at', 'updated_at'], 'integer'],
-            [['name', 'google_place_id', 'slug', 'website', 'full_address', 'vicinity'], 'safe'],
+            [['name', 'google_place_id', 'slug', 'website', 'full_address', 'vicinity', 'notes'], 'safe'],
         ];
     }
 
@@ -65,7 +65,8 @@ class PlaceSearch extends Place
             ->andFilterWhere(['like', 'slug', $this->slug])
             ->andFilterWhere(['like', 'website', $this->website])
             ->andFilterWhere(['like', 'full_address', $this->full_address])
-            ->andFilterWhere(['like', 'vicinity', $this->vicinity]);
+            ->andFilterWhere(['like', 'vicinity', $this->vicinity])
+            ->andFilterWhere(['like', 'notes', $this->notes]);
 
         return $dataProvider;
     }
