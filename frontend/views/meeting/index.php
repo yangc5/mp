@@ -4,10 +4,10 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel common\models\MeetingSearch */
+/* @var $searchModel frontend\models\MeetingSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Meetings';
+$this->title = Yii::t('frontend', 'Meetings');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="meeting-index">
@@ -16,7 +16,9 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Meeting', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('frontend', 'Create {modelClass}', [
+    'modelClass' => 'Meeting',
+]), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([

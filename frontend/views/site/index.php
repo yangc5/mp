@@ -34,7 +34,7 @@ $this->title = 'Meeting Planner';
 
                 <p>In Episode 3, we build code to enable meeting places, integrating with HTML 5 Geolocation, Google Maps and Google Places.</p>
 
-                <p><a class="btn btn-default" href="#">Coming soon</a></p>
+                <p><a class="btn btn-default" href="http://code.tutsplus.com/tutorials/building-your-startup-with-php-geolocation-and-google-places--cms-22729">Episode 3 &raquo;</a></p>
             </div>
         </div>
 

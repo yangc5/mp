@@ -4,10 +4,12 @@ use yii\helpers\Html;
 
 
 /* @var $this yii\web\View */
-/* @var $model common\models\Meeting */
+/* @var $model frontend\models\Meeting */
 
-$this->title = 'Create Meeting';
-$this->params['breadcrumbs'][] = ['label' => 'Meetings', 'url' => ['index']];
+$this->title = Yii::t('frontend', 'Create {modelClass}', [
+    'modelClass' => 'Meeting',
+]);
+$this->params['breadcrumbs'][] = ['label' => Yii::t('frontend', 'Meetings'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="meeting-create">

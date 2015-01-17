@@ -3,12 +3,14 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\Meeting */
+/* @var $model frontend\models\Meeting */
 
-$this->title = 'Update Meeting: ' . ' ' . $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Meetings', 'url' => ['index']];
+$this->title = Yii::t('frontend', 'Update {modelClass}: ', [
+    'modelClass' => 'Meeting',
+]) . ' ' . $model->id;
+$this->params['breadcrumbs'][] = ['label' => Yii::t('frontend', 'Meetings'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = Yii::t('frontend', 'Update');
 ?>
 <div class="meeting-update">
 

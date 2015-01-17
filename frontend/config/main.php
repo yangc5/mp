@@ -11,7 +11,7 @@ return [
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'controllerNamespace' => 'frontend\controllers',
-    'components' => [
+    'components' => [    
       'urlManager' => [
                   'class' => 'yii\web\UrlManager',
                   'enablePrettyUrl' => true,

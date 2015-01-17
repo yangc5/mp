@@ -50,13 +50,13 @@ class Meeting extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'owner_id' => 'Owner ID',
-            'meeting_type' => 'Meeting Type',
-            'message' => 'Message',
-            'status' => 'Status',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
+            'id' => Yii::t('frontend', 'ID'),
+            'owner_id' => Yii::t('frontend', 'Owner ID'),
+            'meeting_type' => Yii::t('frontend', 'Meeting Type'),
+            'message' => Yii::t('frontend', 'Message'),
+            'status' => Yii::t('frontend', 'Status'),
+            'created_at' => Yii::t('frontend', 'Created At'),
+            'updated_at' => Yii::t('frontend', 'Updated At'),
         ];
     }
 
