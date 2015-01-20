@@ -17,12 +17,12 @@
 * NOTE: this file must be saved in UTF-8 encoding.
 */
 return [
-    'Created At' => 'Erstellt am',
-    'Created By' => 'Erstellt von',
-    'Google Place ID' => 'Google Platz ID',
-    'ID' => 'Identifikation',
-    'Name' => 'Name',
-    'Place Type' => 'Platz Typ',
-    'Status' => 'Status',
-    'Updated At' => 'aktualisiert An',
+    'Created At' => 'creato il',
+    'Created By' => 'creato da',
+    'Google Place ID' => 'Google Luogo ID',
+    'ID' => 'ID',
+    'Name' => 'nome',
+    'Place Type' => 'luogo Type',
+    'Status' => 'stato',
+    'Updated At' => 'aggiornato A',
 ];

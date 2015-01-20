@@ -17,12 +17,12 @@
 * NOTE: this file must be saved in UTF-8 encoding.
 */
 return [
-    'Created At' => 'Erstellt am',
-    'Created By' => 'Erstellt von',
-    'Google Place ID' => 'Google Platz ID',
-    'ID' => 'Identifikation',
-    'Name' => 'Name',
-    'Place Type' => 'Platz Typ',
-    'Status' => 'Status',
-    'Updated At' => 'aktualisiert An',
+    'Created At' => '在创建',
+    'Created By' => '创建人',
+    'Google Place ID' => '谷歌将ID',
+    'ID' => 'ID',
+    'Name' => '名字',
+    'Place Type' => '地方类型',
+    'Status' => '状态',
+    'Updated At' => '在更新',
 ];

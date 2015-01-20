@@ -17,12 +17,12 @@
 * NOTE: this file must be saved in UTF-8 encoding.
 */
 return [
-    'Created At' => 'Erstellt am',
-    'Created By' => 'Erstellt von',
-    'Google Place ID' => 'Google Platz ID',
-    'ID' => 'Identifikation',
-    'Name' => 'Name',
-    'Place Type' => 'Platz Typ',
-    'Status' => 'Status',
-    'Updated At' => 'aktualisiert An',
+    'Created At' => 'で作成された',
+    'Created By' => 'によって作成された',
+    'Google Place ID' => 'グーグル·プレイスID',
+    'ID' => 'ID',
+    'Name' => '名前',
+    'Place Type' => '置きタイプ',
+    'Status' => 'ステータス',
+    'Updated At' => 'で更新',
 ];

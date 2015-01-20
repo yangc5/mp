@@ -17,12 +17,12 @@
 * NOTE: this file must be saved in UTF-8 encoding.
 */
 return [
-    'Created At' => 'Erstellt am',
-    'Created By' => 'Erstellt von',
-    'Google Place ID' => 'Google Platz ID',
-    'ID' => 'Identifikation',
-    'Name' => 'Name',
-    'Place Type' => 'Platz Typ',
-    'Status' => 'Status',
-    'Updated At' => 'aktualisiert An',
+    'Created At' => 'أنشئت في',
+    'Created By' => 'تم إنشاؤها بواسطة',
+    'Google Place ID' => 'جوجل مكان ID',
+    'ID' => 'الهوية',
+    'Name' => 'اسم',
+    'Place Type' => 'المكان النوع',
+    'Status' => 'وضع',
+    'Updated At' => 'تحديث في',
 ];

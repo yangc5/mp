@@ -19,7 +19,8 @@
         "yiisoft/yii2-bootstrap": "*",
         "yiisoft/yii2-swiftmailer": "*",
         "2amigos/yii2-google-maps-library": "*",
-        "2amigos/yii2-google-places-library": "*"
+        "2amigos/yii2-google-places-library": "*",
+        "stichoza/google-translate-php": "~2.0"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

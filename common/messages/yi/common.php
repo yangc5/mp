@@ -17,12 +17,12 @@
 * NOTE: this file must be saved in UTF-8 encoding.
 */
 return [
-    'Created At' => 'Erstellt am',
-    'Created By' => 'Erstellt von',
-    'Google Place ID' => 'Google Platz ID',
-    'ID' => 'Identifikation',
-    'Name' => 'Name',
-    'Place Type' => 'Platz Typ',
-    'Status' => 'Status',
-    'Updated At' => 'aktualisiert An',
+    'Created At' => 'באשאפן אין',
+    'Created By' => 'באשאפן דורך',
+    'Google Place ID' => 'Google אָרט שייַן',
+    'ID' => 'שייַן',
+    'Name' => 'נאָמען',
+    'Place Type' => 'אָרט טיפּ',
+    'Status' => 'מאַצעוו',
+    'Updated At' => 'דערהייַנטיקט אין',
 ];
