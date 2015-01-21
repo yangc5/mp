@@ -27,13 +27,8 @@ class PlaceController extends Controller
             ],
             'access' => [
                         'class' => \yii\filters\AccessControl::className(),
-                        'only' => ['create', 'update'],
+                        'only' => ['index','create', 'create_geo','create_place_google','update','view','slug'],
                         'rules' => [
-                            // deny all POST requests
-                            [
-                                'allow' => false,
-                                'verbs' => ['POST']
-                            ],
                             // allow authenticated users
                             [
                                 'allow' => true,

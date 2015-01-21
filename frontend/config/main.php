@@ -17,12 +17,15 @@ return [
                   'enablePrettyUrl' => true,
                   'showScriptName' => 'false',
                   'rules' => [
+                      'place' => 'place/index',
                       'place/index' => 'place/index',
                       'place/create' => 'place/create',
                       'place/create_geo' => 'place/create_geo',
                       'place/create_place_google' => 'place/create_place_google',
                       'place/view/<id:\d+>' => 'place/view',  
-                      'place/<slug:\w+>' => 'place/slug',          
+                      'place/update/<id:\d+>' => 'place/update',  
+                      'place/<slug>' => 'place/slug',
+					  'defaultRoute' => '/site/index',
                   ],
               ],
         'user' => [
