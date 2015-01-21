@@ -15,7 +15,15 @@ return [
       'urlManager' => [
                   'class' => 'yii\web\UrlManager',
                   'enablePrettyUrl' => true,
-                  'showScriptName' => 'false'
+                  'showScriptName' => 'false',
+                  'rules' => [
+                      'place/index' => 'place/index',
+                      'place/create' => 'place/create',
+                      'place/create_geo' => 'place/create_geo',
+                      'place/create_place_google' => 'place/create_place_google',
+                      'place/view/<id:\d+>' => 'place/view',  
+                      'place/<slug:\w+>' => 'place/slug',          
+                  ],
               ],
         'user' => [
             'identityClass' => 'common\models\User',

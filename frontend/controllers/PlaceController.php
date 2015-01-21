@@ -25,6 +25,23 @@ class PlaceController extends Controller
                     'delete' => ['post'],
                 ],
             ],
+            'access' => [
+                        'class' => \yii\filters\AccessControl::className(),
+                        'only' => ['create', 'update'],
+                        'rules' => [
+                            // deny all POST requests
+                            [
+                                'allow' => false,
+                                'verbs' => ['POST']
+                            ],
+                            // allow authenticated users
+                            [
+                                'allow' => true,
+                                'roles' => ['@'],
+                            ],
+                            // everything else is denied
+                        ],
+                    ],            
         ];
     }
 
@@ -43,15 +60,20 @@ class PlaceController extends Controller
         ]);
     }
 
-    /**
-     * Displays a single Place model.
-     * @param integer $id
-     * @return mixed
-     */
     public function actionView($id)
+    {
+        $model=$this->findModel($id);
+        $gps = $model->getLocation($model->id);
+        return $this->render('view', [
+            'model' => $model,
+            'gps'=> $gps,
+        ]);
+    }
+
+    public function actionSlug($slug)
     { 
-        $model = $this->findModel($id);
-        $gps = $model->getLocation($id);
+      $model = Place::find()->where(['slug'=>$slug])->one();
+      $gps = $model->getLocation($model->id);
         return $this->render('view', [
             'model' => $model,
             'gps'=> $gps,

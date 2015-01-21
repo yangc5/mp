@@ -57,7 +57,6 @@ class Place extends \yii\db\ActiveRecord
             [
                 'class' => SluggableBehavior::className(),
                 'attribute' => 'name',
-                // 'slugAttribute' => 'slug',
             ],
             'timestamp' => [
                 'class' => 'yii\behaviors\TimestampBehavior',
