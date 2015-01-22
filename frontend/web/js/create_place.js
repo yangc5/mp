@@ -19,7 +19,13 @@ function setupListeners() {
         // migrates JSON data from Google to hidden form fields
         populateResult(place);
       }
-  });
+    });
+    var place_input = document.getElementById('place-searchbox');
+    google.maps.event.addDomListener(place_input, 'keydown', function(e) { 
+        if (e.keyCode == 13) { 
+            e.preventDefault();
+        }
+      });
 }
 
 function populateResult(place) {

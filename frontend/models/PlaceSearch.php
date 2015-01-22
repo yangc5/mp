@@ -67,7 +67,7 @@ class PlaceSearch extends Place
             ->andFilterWhere(['like', 'full_address', $this->full_address])
             ->andFilterWhere(['like', 'vicinity', $this->vicinity])
             ->andFilterWhere(['like', 'notes', $this->notes]);
-
+        
         return $dataProvider;
     }
 }

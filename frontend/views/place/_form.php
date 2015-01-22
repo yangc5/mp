@@ -11,7 +11,9 @@ use yii\widgets\ActiveForm;
 <div class="place-form">
 
     <?php $form = ActiveForm::begin(); ?>
-
+    
+    <?php echo $form->errorSummary($model);?> 
+    
     <?= $form->field($model, 'name')->textInput(['maxlength' => 255]) ?>
 
     <?= $form->field($model, 'full_address')->textInput(['maxlength' => 255])->label('Address') ?>

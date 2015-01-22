@@ -9,7 +9,7 @@ $this->title = Yii::t('frontend', 'Update {modelClass}: ', [
     'modelClass' => 'Place',
 ]) . ' ' . $model->name;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('frontend', 'Places'), 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
+$this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['slug', 'slug' => $model->slug]];
 $this->params['breadcrumbs'][] = Yii::t('frontend', 'Update');
 ?>
 <div class="place-update">

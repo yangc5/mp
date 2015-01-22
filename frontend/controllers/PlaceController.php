@@ -9,7 +9,6 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\web\User;
-use dosamigos\google\maps\services\GeocodingClient;
 
 /**
  * PlaceController implements the CRUD actions for Place model.
@@ -76,39 +75,6 @@ class PlaceController extends Controller
     }
 
     /**
-     * Creates a new Place model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
-     */
-    public function actionCreate()
-    {
-        $model = new Place();       
-        if ($model->load(Yii::$app->request->post())) {
-			$form = Yii::$app->request->post();
-            if (Yii::$app->user->getIsGuest()) {
-              $model->created_by = 1;
-            } else {
-              $model->created_by= Yii::$app->user->getId();
-            }
-            $model->save();
-            $gc = new GeocodingClient();
-            $result = $gc->lookup(array('address'=>$form['Place']['full_address'],'components'=>1));
-			$location = $result['results'][0]['geometry']['location'];
-            if (!is_null($location)) {
-				$lat = $location['lat'];
-				$lng = $location['lng'];
-             // add GPS entry in PlaceGeometry
-             $model->addGeometryByPoint($model,$lat,$lng);
-			}            
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
-        }
-    }
-
-    /**
      * Updates an existing Place model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
@@ -155,6 +121,40 @@ class PlaceController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+
+    /**
+     * Creates a new Place model.
+     * If creation is successful, the browser will be redirected to the 'view' page.
+     * @return mixed
+     */
+    public function actionCreate()
+    {
+        $model = new Place();       
+        if ($model->load(Yii::$app->request->post())) {
+			      $form = Yii::$app->request->post();
+            if (!is_numeric($model->place_type)) {
+               $model->place_type=Place::TYPE_OTHER;
+            }
+            $model->created_by= Yii::$app->user->getId();
+            // validate the form against model rules
+            if ($model->validate()) {
+                // all inputs are valid
+                $model->save();
+                // lookup gps location from address
+                $model->addLocationFromAddress($model,$form['Place']['full_address']); 
+                return $this->redirect(['view', 'id' => $model->id]);
+            } else {
+                // validation failed
+                return $this->render('create', [
+                    'model' => $model,
+                ]);
+            }            
+        } else {
+            return $this->render('create', [
+                'model' => $model,
+            ]);
+        }
+    }
     
     /**
       * Creates a new Place model from Google Place
@@ -165,16 +165,24 @@ class PlaceController extends Controller
      {
        $model = new Place();        
        if ($model->load(Yii::$app->request->post())) {
-           if (Yii::$app->user->getIsGuest()) {
-             $model->created_by = 1;
-           } else {
-             $model->created_by= Yii::$app->user->getId();
-           }
            $form = Yii::$app->request->post();
-           $model->save();
-           // add GPS entry in PlaceGeometry
-           $model->addGeometry($model,$form['Place']['location']);
-           return $this->redirect(['view', 'id' => $model->id]);
+           if (!is_numeric($model->place_type)) {
+              $model->place_type=Place::TYPE_OTHER;
+           }
+           $model->created_by= Yii::$app->user->getId();
+           // validate the form against model rules
+           if ($model->validate()) {
+               // all inputs are valid
+               $model->save();
+               // add GPS entry in PlaceGeometry
+               $model->addGeometry($model,$form['Place']['location']);
+               return $this->redirect(['view', 'id' => $model->id]);
+           } else {
+               // validation failed
+               return $this->render('create_place_google', [
+                   'model' => $model,
+               ]);
+           }
        } else {
            return $this->render('create_place_google', [
                'model' => $model,
@@ -189,16 +197,23 @@ class PlaceController extends Controller
      {
          $model = new Place();
          if ($model->load(Yii::$app->request->post())) {
-             if (Yii::$app->user->getIsGuest()) {
-               $model->created_by = 1;
-             } else {
-               $model->created_by= Yii::$app->user->getId();
-             }
              $form = Yii::$app->request->post();
-             $model->save();
-             // add GPS entry in PlaceGeometry
-             $model->addGeometryByPoint($model,$form['Place']['lat'],$form['Place']['lng']);
-             return $this->redirect(['view', 'id' => $model->id]);
+             $model->created_by= Yii::$app->user->getId();
+             if (!is_numeric($model->place_type)) {
+                $model->place_type=Place::TYPE_OTHER;
+             }
+             if ($model->validate()) {
+                  // all inputs are valid
+                  $model->save();
+                  // add GPS entry in PlaceGeometry                    
+                  $model->addGeometryByPoint($model,$form['Place']['lat'],$form['Place']['lng']);
+                  return $this->redirect(['view', 'id' => $model->id]);
+              } else {
+                  // validation failed
+                  return $this->render('create_geo', [
+                      'model' => $model,
+                  ]);
+              }
          } else {
              return $this->render('create_geo', [
                  'model' => $model,
