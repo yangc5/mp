@@ -3,6 +3,7 @@
 namespace frontend\models;
 
 use Yii;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "meeting".
@@ -24,6 +25,18 @@ use Yii;
  */
 class Meeting extends \yii\db\ActiveRecord
 {
+  const TYPE_OTHER = 0;
+  const TYPE_COFFEE = 10;
+  const TYPE_BREAKFAST = 20;
+  const TYPE_LUNCH = 30;
+  const TYPE_PHONE = 40;
+  const TYPE_VIDEO = 50;
+  const TYPE_HAPPYHOUR = 60;
+  const TYPE_DINNER = 70;
+  const TYPE_DRINKS = 80;
+  const TYPE_BRUNCH = 90;
+  const TYPE_OFFICE = 100;
+  
     /**
      * @inheritdoc
      */
@@ -32,13 +45,26 @@ class Meeting extends \yii\db\ActiveRecord
         return 'meeting';
     }
 
+    public function behaviors()
+    {
+        return [
+            'timestamp' => [
+                'class' => 'yii\behaviors\TimestampBehavior',
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_INSERT => ['created_at', 'updated_at'],
+                    ActiveRecord::EVENT_BEFORE_UPDATE => ['updated_at'],
+                ],
+            ],
+        ];
+    }    
+
     /**
      * @inheritdoc
      */
     public function rules()
     {
         return [
-            [['owner_id', 'message', 'created_at', 'updated_at'], 'required'],
+            [['owner_id', 'message'], 'required'],
             [['owner_id', 'meeting_type', 'status', 'created_at', 'updated_at'], 'integer'],
             [['message'], 'string']
         ];
@@ -107,4 +133,26 @@ class Meeting extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Participant::className(), ['meeting_id' => 'id']);
     }
+    
+    public function getMeetingType($data) {
+      $options = $this->getMeetingTypeOptions();
+      return $options[$data];
+    }
+    
+    public function getMeetingTypeOptions()
+    {
+      return array(
+        self:: TYPE_OFFICE => 'Office',
+        self:: TYPE_COFFEE => 'Coffee',
+        self:: TYPE_BREAKFAST => 'Breakfast',
+        self:: TYPE_LUNCH => 'Lunch',
+        self:: TYPE_PHONE => 'Phone call',
+        self:: TYPE_VIDEO => 'Video conference',
+        self:: TYPE_HAPPYHOUR => 'Happy hour',
+        self:: TYPE_DINNER => 'Dinner',
+        self:: TYPE_DRINKS => 'Drinks',
+        self:: TYPE_BRUNCH => 'Brunch',
+        self:: TYPE_OTHER => 'Other',
+         );
+     }		
 }

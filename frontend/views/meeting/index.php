@@ -25,15 +25,17 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+          'owner_id',
+          [
+              'attribute' => 'meeting_type',
+              'format' => 'raw',
+              'value' => function ($model) {                      
+                          return '<div>'.$model->getMeetingType($model->meeting_type).'</div>';
+                  },
+          ],
 
-            'id',
-            'owner_id',
             'meeting_type',
             'message:ntext',
-            'status',
-            // 'created_at',
-            // 'updated_at',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

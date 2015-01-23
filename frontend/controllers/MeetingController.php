@@ -61,13 +61,23 @@ class MeetingController extends Controller
     public function actionCreate()
     {
         $model = new Meeting();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+          $model->owner_id= Yii::$app->user->getId();
+          // validate the form against model rules
+          if ($model->validate()) {
+              // all inputs are valid
+              $model->save();
+              return $this->redirect(['view', 'id' => $model->id]);
+          } else {
+              // validation failed
+              return $this->render('create', [
+                  'model' => $model,
+              ]);
+          }          
         } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
+          return $this->render('create', [
+              'model' => $model,
+          ]);          
         }
     }
 

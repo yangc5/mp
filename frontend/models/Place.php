@@ -5,7 +5,6 @@ namespace frontend\models;
 use Yii;
 use yii\behaviors\SluggableBehavior;
 use yii\db\ActiveRecord;
-use yii\db\Expression;
 use dosamigos\google\maps\services\GeocodingClient;
 
 /**

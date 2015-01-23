@@ -12,17 +12,13 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'owner_id')->textInput() ?>
+    <?= $form->field($model, 'meeting_type')
+            ->dropDownList(
+                $model->getMeetingTypeOptions(),   
+                ['prompt'=>Yii::t('frontend','What type of meeting is this?')] 
+            )->label(Yii::t('frontend','Meeting Type')) ?>
 
-    <?= $form->field($model, 'meeting_type')->textInput() ?>
-
-    <?= $form->field($model, 'message')->textarea(['rows' => 6]) ?>
-
-    <?= $form->field($model, 'status')->textInput() ?>
-
-    <?= $form->field($model, 'created_at')->textInput() ?>
-
-    <?= $form->field($model, 'updated_at')->textInput() ?>
+    <?= $form->field($model, 'message')->textarea(['rows' => 6])->label(Yii::t('frontend','Personal Message')) ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? Yii::t('frontend', 'Create') : Yii::t('frontend', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
