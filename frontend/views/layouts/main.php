@@ -32,22 +32,38 @@ AppAsset::register($this);
                     'class' => 'navbar-inverse navbar-fixed-top',
                 ],
             ]);
-            $menuItems = [
-                ['label' => Yii::t('frontend','Home'), 'url' => ['/site/index']],
-                ['label' => Yii::t('frontend','Places'), 'url' => ['/place']],
-                ['label' => Yii::t('frontend','About'), 'url' => ['/site/about']],
-                ['label' => Yii::t('frontend','Contact'), 'url' => ['/site/contact']],
-            ];
             if (Yii::$app->user->isGuest) {
                 $menuItems[] = ['label' => Yii::t('frontend','Signup'), 'url' => ['/site/signup']];
                 $menuItems[] = ['label' => Yii::t('frontend','Login'), 'url' => ['/site/login']];
-            } else {
-                $menuItems[] = [
-                    'label' => Yii::t('frontend','Logout').' (' . Yii::$app->user->identity->username . ')',
-                    'url' => ['/site/logout'],
-                    'linkOptions' => ['data-method' => 'post']
-                ];
+            } else {	
+	            $menuItems = [
+	                ['label' => Yii::t('frontend','Places'), 'url' => ['/place']],              
+	            ];	
             }
+			$menuItems[]=['label' => Yii::t('frontend','About'),
+				'items' => [
+					['label' => Yii::t('frontend','Learn more'), 'url' => ['/site/about']],
+					['label' => Yii::t('frontend','Contact'), 'url' => ['/site/contact']],
+				],
+			];    
+			if (!Yii::$app->user->isGuest) {
+				$menuItems[] = [
+				            'label' => 'Account',
+				            'items' => [
+				                 [
+				                    'label' => Yii::t('frontend','Contact information'),
+				                    'url' => ['/user-contact'],
+				                ],
+				                 [
+				                    'label' => Yii::t('frontend','Logout').' (' . Yii::$app->user->identity->username . ')',
+				                    'url' => ['/site/logout'],
+				                    'linkOptions' => ['data-method' => 'post']
+				                ],
+				            ],
+				        ];
+				
+			}            
+			
             echo Nav::widget([
                 'options' => ['class' => 'navbar-nav navbar-right'],
                 'items' => $menuItems,

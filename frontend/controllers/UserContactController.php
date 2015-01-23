@@ -3,16 +3,16 @@
 namespace frontend\controllers;
 
 use Yii;
-use frontend\models\UserPlace;
-use frontend\models\UserPlaceSearch;
+use frontend\models\UserContact;
+use frontend\models\UserContactSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * UserPlaceController implements the CRUD actions for UserPlace model.
+ * UserContactController implements the CRUD actions for UserContact model.
  */
-class UserPlaceController extends Controller
+class UserContactController extends Controller
 {
     public function behaviors()
     {
@@ -25,7 +25,7 @@ class UserPlaceController extends Controller
             ],
             'access' => [
                         'class' => \yii\filters\AccessControl::className(),
-                        'only' => ['index'],
+                        'only' => ['index','create','update','view','delete'],
                         'rules' => [
                             // allow authenticated users
                             [
@@ -35,17 +35,18 @@ class UserPlaceController extends Controller
                             // everything else is denied
                         ],
                     ],            
+
         ];
     }
 
     /**
-     * Lists all UserPlace models.
+     * Lists all UserContact models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new UserPlaceSearch();
-        $searchModel->user_id = Yii::$app->user->getId();
+        $searchModel = new UserContactSearch();
+		$searchModel->user_id = Yii::$app->user->getId();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -55,7 +56,7 @@ class UserPlaceController extends Controller
     }
 
     /**
-     * Displays a single UserPlace model.
+     * Displays a single UserContact model.
      * @param integer $id
      * @return mixed
      */
@@ -67,16 +68,30 @@ class UserPlaceController extends Controller
     }
 
     /**
-     * Creates a new UserPlace model.
+     * Creates a new UserContact model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new UserPlace();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        $model = new UserContact();
+		if ($model->load(Yii::$app->request->post())) {
+			$form = Yii::$app->request->post();
+            if (!is_numeric($model->contact_type)) {
+               $model->contact_type=UserContact::TYPE_OTHER;
+            }
+            $model->user_id= Yii::$app->user->getId();
+            // validate the form against model rules
+            if ($model->validate()) {
+                // all inputs are valid
+                $model->save();
+                return $this->redirect(['index']);
+            } else {
+                // validation failed
+                return $this->render('create', [
+                    'model' => $model,
+                ]);
+            }            
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -85,7 +100,7 @@ class UserPlaceController extends Controller
     }
 
     /**
-     * Updates an existing UserPlace model.
+     * Updates an existing UserContact model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -104,7 +119,7 @@ class UserPlaceController extends Controller
     }
 
     /**
-     * Deletes an existing UserPlace model.
+     * Deletes an existing UserContact model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -117,15 +132,15 @@ class UserPlaceController extends Controller
     }
 
     /**
-     * Finds the UserPlace model based on its primary key value.
+     * Finds the UserContact model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return UserPlace the loaded model
+     * @return UserContact the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = UserPlace::findOne($id)) !== null) {
+        if (($model = UserContact::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

@@ -23,8 +23,8 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'place_type')
             ->dropDownList(
                 $model->getPlaceTypeOptions(),   
-                ['prompt'=>'What type of place is this?'] 
-            )->label('Type of Place') ?>
+                ['prompt'=>Yii::t('frontend','What type of place is this?')] 
+            )->label(Yii::t('frontend','Type of Place')) ?>
             
     <?= $form->field($model, 'notes')->textArea() ?>
 
