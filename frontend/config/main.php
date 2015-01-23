@@ -19,6 +19,7 @@ return [
                   'rules' => [
                       'place' => 'place/index',
                       'place/index' => 'place/index',
+                      'place/yours' => 'place/yours',
                       'place/create' => 'place/create',
                       'place/create_geo' => 'place/create_geo',
                       'place/create_place_google' => 'place/create_place_google',

@@ -50,10 +50,10 @@ $this->params['breadcrumbs'][] = $this->title;
 				      'template'=>'{view} {update} ',
 					    'buttons'=>[
                 'view' => function ($url, $model) {     
-                  return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', '../place/'.$model->place->slug, ['title' => Yii::t('yii', 'View'),]);	
+                  return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', Yii::getAlias('@web').'/place/'.$model->place->slug, ['title' => Yii::t('yii', 'View'),]);	
 						      },
                  'update' => function ($url, $model) {     
-                    return Html::a('<span class="glyphicon glyphicon-pencil"></span>', '../place/update/'.$model->place_id, ['title' => Yii::t('yii', 'Update'),]);	
+                    return Html::a('<span class="glyphicon glyphicon-pencil"></span>', Yii::getAlias('@web').'/place/update/'.$model->place_id, ['title' => Yii::t('yii', 'Update'),]);	
   						    }
 							],
 			      ],

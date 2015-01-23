@@ -18,6 +18,7 @@ class PlaceSearch extends Place
     public function rules()
     {
         return [
+            [['created_by'], 'required'],        
             [['id', 'place_type', 'status', 'created_by', 'created_at', 'updated_at'], 'integer'],
             [['name', 'google_place_id', 'slug', 'website', 'full_address', 'vicinity', 'notes'], 'safe'],
         ];
@@ -41,8 +42,7 @@ class PlaceSearch extends Place
      */
     public function search($params)
     {
-        $query = Place::find();
-
+        $query = Place::find()->joinWith('user_place')->where(['user_id' => Yii::$app->user->getId()]);
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);

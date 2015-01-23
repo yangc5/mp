@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel frontend\models\PlaceSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('frontend', 'Places');
+$this->title = Yii::t('frontend', 'Your Places');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="place-index">
@@ -43,7 +43,7 @@ $this->params['breadcrumbs'][] = $this->title;
 				      'template'=>'{view} {update} ',
 					    'buttons'=>[
                 'view' => function ($url, $model) {     
-                  return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', $model->slug, ['title' => Yii::t('yii', 'View'),]);	
+                  return Html::a('<span class="glyphicon glyphicon-eye-open"></span>',$model->slug, ['title' => Yii::t('yii', 'View'),]);	
 						      }
 							],
 			      ],
