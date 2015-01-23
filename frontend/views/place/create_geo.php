@@ -7,7 +7,7 @@ use yii\helpers\Html;
 /* @var $model frontend\models\Place */
 
 $this->title = 'Create Place By Geolocation';
-$this->params['breadcrumbs'][] = ['label' => 'Places', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('frontend', 'Your Places'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="place-create">

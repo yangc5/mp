@@ -45,13 +45,7 @@ class PlaceController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new PlaceSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
+        return $this->redirect('user-place/index');
     }
 
     public function actionView($id)
