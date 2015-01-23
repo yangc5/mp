@@ -136,23 +136,26 @@ class Meeting extends \yii\db\ActiveRecord
     
     public function getMeetingType($data) {
       $options = $this->getMeetingTypeOptions();
+	  if (!isset($options[$data])) {
+		$data = self::TYPE_OTHER;
+		}
       return $options[$data];
     }
     
     public function getMeetingTypeOptions()
     {
       return array(
-        self:: TYPE_OFFICE => 'Office',
-        self:: TYPE_COFFEE => 'Coffee',
-        self:: TYPE_BREAKFAST => 'Breakfast',
-        self:: TYPE_LUNCH => 'Lunch',
-        self:: TYPE_PHONE => 'Phone call',
-        self:: TYPE_VIDEO => 'Video conference',
-        self:: TYPE_HAPPYHOUR => 'Happy hour',
-        self:: TYPE_DINNER => 'Dinner',
-        self:: TYPE_DRINKS => 'Drinks',
-        self:: TYPE_BRUNCH => 'Brunch',
-        self:: TYPE_OTHER => 'Other',
+        self::TYPE_OFFICE => 'Office',
+        self::TYPE_COFFEE => 'Coffee',
+        self::TYPE_BREAKFAST => 'Breakfast',
+        self::TYPE_LUNCH => 'Lunch',
+        self::TYPE_PHONE => 'Phone call',
+        self::TYPE_VIDEO => 'Video conference',
+        self::TYPE_HAPPYHOUR => 'Happy hour',
+        self::TYPE_DINNER => 'Dinner',
+        self::TYPE_DRINKS => 'Drinks',
+        self::TYPE_BRUNCH => 'Brunch',
+        self::TYPE_OTHER => 'Other',
          );
      }		
 }

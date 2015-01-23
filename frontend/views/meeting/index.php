@@ -26,13 +26,13 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
           'owner_id',
-          [
-              'attribute' => 'meeting_type',
-              'format' => 'raw',
-              'value' => function ($model) {                      
-                          return '<div>'.$model->getMeetingType($model->meeting_type).'</div>';
-                  },
-          ],
+	      [
+	          'attribute' => 'meeting_type',
+	          'format' => 'raw',
+	          'value' => function ($model) {                      
+	                      return '<div>'.$model->getMeetingType($model->meeting_type).'</div>';
+	              },
+	      ],
 
             'meeting_type',
             'message:ntext',
