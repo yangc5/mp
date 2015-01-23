@@ -13,6 +13,7 @@ $this->title = 'Meeting Planner';
     </div>
 
     <div class="body-content">
+		<!--- begin row one --->
 
         <div class="row">
             <div class="col-lg-4">
@@ -39,4 +40,34 @@ $this->title = 'Meeting Planner';
         </div>
 
     </div>
+		<!--- end row one --->
+
+		<!--- begin row two --->
+        <div class="row">
+            <div class="col-lg-4">
+                <h2><?= Yii::t('frontend','Localization with I18n') ?></h2>
+
+                <p><?= Yii::t('frontend','Using Yii\'s built in localization capability we create the infrastructure for multiple languages') ?></p>
+
+                <p><a class="btn btn-default" href="http://code.tutsplus.com/tutorials/building-your-startup-with-php-localization-with-i18n--cms-23102"><?= Yii::t('frontend','Episode 4 (coming soon)' ) ?> &raquo;</a></p>
+            </div>
+            <div class="col-lg-4">
+                <h2><?= Yii::t('frontend','Access Controls &amp; Polish') ?> </h2>
+
+                <p><?= Yii::t('frontend','We circle back to polish some of what we\'ve built to date leveraging more of the Yii Framework.') ?> </p>
+
+                <p><a class="btn btn-default" href="#"><?= Yii::t('frontend','Episode 5 (coming soon)') ?> &raquo;</a></p>
+            </div>
+            <div class="col-lg-4">
+                <h2><?= Yii::t('frontend','TBD') ?></h2>
+
+                <p><?= Yii::t('frontend','To be decided.') ?> </p>
+
+                <p><a class="btn btn-default" href="#"><?= Yii::t('frontend','Episode 6 (tbd)') ?> &raquo;</a></p>
+            </div>
+        </div>
+
+    </div>
+	<!--- end row two --->
+
 </div>
