@@ -9,7 +9,7 @@ $this->title = 'Meeting Planner';
 
         <p class="lead"><?= Yii::t('frontend','A new app to make scheduling as simple as it should be.') ?></p>
 
-        <p><a class="btn btn-lg btn-success" href="/site/about"><?= Yii::t('frontend','Learn More') ?></a></p>
+        <p><a class="btn btn-lg btn-success" href="./site/about"><?= Yii::t('frontend','Learn More') ?></a></p>
     </div>
 
     <div class="body-content">
