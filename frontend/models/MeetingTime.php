@@ -3,6 +3,7 @@
 namespace frontend\models;
 
 use Yii;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "meeting_time".
@@ -34,8 +35,21 @@ class MeetingTime extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['meeting_id', 'start', 'suggested_by', 'created_at', 'updated_at'], 'required'],
+            [['meeting_id', 'start', 'suggested_by'], 'required'],
             [['meeting_id', 'start', 'suggested_by', 'status', 'created_at', 'updated_at'], 'integer']
+        ];
+    }
+    
+    public function behaviors()
+    {
+        return [
+            'timestamp' => [
+                'class' => 'yii\behaviors\TimestampBehavior',
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_INSERT => ['created_at', 'updated_at'],
+                    ActiveRecord::EVENT_BEFORE_UPDATE => ['updated_at'],
+                ],
+            ],
         ];
     }
 

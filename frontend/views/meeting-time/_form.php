@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use dosamigos\datetimepicker\DateTimePicker;
 
 /* @var $this yii\web\View */
 /* @var $model frontend\models\MeetingTime */
@@ -12,20 +13,23 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'meeting_id')->textInput() ?>
-
-    <?= $form->field($model, 'start')->textInput() ?>
-
-    <?= $form->field($model, 'suggested_by')->textInput() ?>
-
-    <?= $form->field($model, 'status')->textInput() ?>
-
-    <?= $form->field($model, 'created_at')->textInput() ?>
-
-    <?= $form->field($model, 'updated_at')->textInput() ?>
-
-    <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? Yii::t('frontend', 'Create') : Yii::t('frontend', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+    <?= DateTimePicker::widget([
+        'model' => $model,
+        'attribute' => 'start',
+        'language' => 'en',
+        'size' => 'ms',
+        'clientOptions' => [
+            'autoclose' => true,
+            'format' => 'MM dd, yyyy HH:ii P',
+            'todayBtn' => true,
+            'minuteStep'=> 15, 
+            'pickerPosition' => 'bottom-left',
+            'startDate'=> "2013-02-14 10:00",
+        ]
+    ]);?>   
+    
+     <div class="form-group">
+        <?= Html::submitButton($model->isNewRecord ? Yii::t('frontend', 'Add') : Yii::t('frontend', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

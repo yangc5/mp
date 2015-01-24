@@ -4,15 +4,15 @@ use yii\helpers\Html;
 
 
 /* @var $this yii\web\View */
-/* @var $model frontend\models\MeetingNote */
+/* @var $model frontend\models\MeetingPlace */
 
 $this->title = Yii::t('frontend', 'Add a {modelClass}', [
-    'modelClass' => 'Meeting Note',
+    'modelClass' => 'Meeting Place',
 ]);
-$this->params['breadcrumbs'][] = ['label' => Yii::t('frontend', 'Meeting Notes'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('frontend', 'Meeting Places'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="meeting-note-create">
+<div class="meeting-place-create">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

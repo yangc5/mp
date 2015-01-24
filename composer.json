@@ -20,7 +20,8 @@
         "yiisoft/yii2-swiftmailer": "*",
         "2amigos/yii2-google-maps-library": "*",
         "2amigos/yii2-google-places-library": "*",
-        "stichoza/google-translate-php": "~2.0"
+        "stichoza/google-translate-php": "~2.0",
+        "2amigos/yii2-date-time-picker-widget": "*"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

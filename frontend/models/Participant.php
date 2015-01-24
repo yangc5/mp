@@ -57,12 +57,11 @@ class Participant extends \yii\db\ActiveRecord
             [['meeting_id'], 'required'],
           // the email attribute should be a valid email address
             ['email', 'email'],            
-            [['meeting_id', 'participant_id', 'invited_by', 'status', 'created_at', 'updated_at'], 'integer']
+            [['meeting_id', 'participant_id', 'invited_by', 'status', 'created_at', 'updated_at'], 'integer'],
               ['username', 'filter', 'filter' => 'trim'],
               ['username', 'required'],
               ['username', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This username has already been taken.'],
               ['username', 'string', 'min' => 2, 'max' => 255],
-
               ['email', 'filter', 'filter' => 'trim'],
               ['email', 'required'],
               ['email', 'email'],

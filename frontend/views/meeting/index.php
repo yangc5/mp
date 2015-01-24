@@ -25,7 +25,6 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-          'owner_id',
 	      [
 	          'attribute' => 'meeting_type',
 	          'format' => 'raw',

@@ -41,7 +41,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
 
       <?= Html::a(Yii::t('frontend', 'Invite Participant'), ['/participant/create', 'meeting_id' => $model->id], ['class' => 'btn btn-primary']) ?>
-      <?= Html::a(Yii::t('frontend', 'Add Place'), ['/place/create', 'meeting_id' => $model->id], ['class' => 'btn btn-primary']) ?>
+      <?= Html::a(Yii::t('frontend', 'Add Place'), ['/meeting-place/create', 'meeting_id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a(Yii::t('frontend', 'Add Time'), ['/meeting-time/create', 'meeting_id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a(Yii::t('frontend', 'Add Note'), ['/meeting-note/create', 'meeting_id' => $model->id], ['class' => 'btn btn-primary']) ?>
         </p>

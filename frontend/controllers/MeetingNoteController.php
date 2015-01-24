@@ -14,6 +14,8 @@ use yii\filters\VerbFilter;
  */
 class MeetingNoteController extends Controller
 {
+    const STATUS_POSTED = 0;
+    
     public function behaviors()
     {
         return [
@@ -23,6 +25,18 @@ class MeetingNoteController extends Controller
                     'delete' => ['post'],
                 ],
             ],
+            'access' => [
+                        'class' => \yii\filters\AccessControl::className(),
+                        'only' => ['create','update','view','delete'],
+                        'rules' => [
+                            // allow authenticated users
+                            [
+                                'allow' => true,
+                                'roles' => ['@'],
+                            ],
+                            // everything else is denied
+                        ],
+                    ],                        
         ];
     }
 
@@ -32,13 +46,7 @@ class MeetingNoteController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new MeetingNoteSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
+      $this->redirect(Yii::getAlias('@web').'/meeting');
     }
 
     /**
@@ -58,16 +66,28 @@ class MeetingNoteController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
+    public function actionCreate($meeting_id)
     {
         $model = new MeetingNote();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        $model->meeting_id= $meeting_id;
+        $model->posted_by= Yii::$app->user->getId();
+        $model->status = self::STATUS_POSTED;
+        if ($model->load(Yii::$app->request->post())) {
+          // validate the form against model rules
+          if ($model->validate()) {
+              // all inputs are valid
+              $model->save();              
+              return $this->redirect(['view', 'id' => $model->id]);
+          } else {
+              // validation failed
+              return $this->render('create', [
+                  'model' => $model,
+              ]);
+          }          
         } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
+          return $this->render('create', [
+              'model' => $model,
+          ]);          
         }
     }
 
