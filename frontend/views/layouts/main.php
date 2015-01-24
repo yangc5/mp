@@ -37,22 +37,31 @@ AppAsset::register($this);
                 $menuItems[] = ['label' => Yii::t('frontend','Login'), 'url' => ['/site/login']];
             } else {	
 	            $menuItems = [
+                  ['label' => Yii::t('frontend','Meetings'), 'url' => ['/meeting']],              
 	                ['label' => Yii::t('frontend','Places'), 'url' => ['/place/yours']],              
 	            ];	
             }
       			$menuItems[]=['label' => Yii::t('frontend','About'),
       				'items' => [
       					['label' => Yii::t('frontend','Learn more'), 'url' => ['/site/about']],
-      					['label' => Yii::t('frontend','Contact'), 'url' => ['/site/contact']],
+      					['label' => Yii::t('frontend','Contact us'), 'url' => ['/site/contact']],
       				],
       			];    
       			if (!Yii::$app->user->isGuest) {
       				$menuItems[] = [
       				            'label' => 'Account',
       				            'items' => [
+    				                 [
+    				                    'label' => Yii::t('frontend','Friends'),
+    				                    'url' => ['/friend'],
+    				                ],
       				                 [
       				                    'label' => Yii::t('frontend','Contact information'),
       				                    'url' => ['/user-contact'],
+      				                ],
+      				                 [
+      				                    'label' => Yii::t('frontend','Settings'),
+      				                    'url' => ['/user-setting'],
       				                ],
       				                 [
       				                    'label' => Yii::t('frontend','Logout').' (' . Yii::$app->user->identity->username . ')',
