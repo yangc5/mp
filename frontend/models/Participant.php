@@ -3,6 +3,7 @@
 namespace frontend\models;
 
 use Yii;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "participant".
@@ -21,6 +22,11 @@ use Yii;
  */
 class Participant extends \yii\db\ActiveRecord
 {
+  
+    public $email;
+    public $username;
+    public $password;
+    
     /**
      * @inheritdoc
      */
@@ -29,14 +35,42 @@ class Participant extends \yii\db\ActiveRecord
         return 'participant';
     }
 
+    public function behaviors()
+    {
+        return [
+            'timestamp' => [
+                'class' => 'yii\behaviors\TimestampBehavior',
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_INSERT => ['created_at', 'updated_at'],
+                    ActiveRecord::EVENT_BEFORE_UPDATE => ['updated_at'],
+                ],
+            ],
+        ];
+    }
+    
     /**
      * @inheritdoc
      */
     public function rules()
     {
         return [
-            [['meeting_id', 'participant_id', 'invited_by', 'created_at', 'updated_at'], 'required'],
+            [['meeting_id'], 'required'],
+          // the email attribute should be a valid email address
+            ['email', 'email'],            
             [['meeting_id', 'participant_id', 'invited_by', 'status', 'created_at', 'updated_at'], 'integer']
+              ['username', 'filter', 'filter' => 'trim'],
+              ['username', 'required'],
+              ['username', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This username has already been taken.'],
+              ['username', 'string', 'min' => 2, 'max' => 255],
+
+              ['email', 'filter', 'filter' => 'trim'],
+              ['email', 'required'],
+              ['email', 'email'],
+              ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This email address has already been taken.'],
+
+              ['password', 'required'],
+              ['password', 'string', 'min' => 6],
+            
         ];
     }
 
@@ -78,5 +112,23 @@ class Participant extends \yii\db\ActiveRecord
     public function getParticipant()
     {
         return $this->hasOne(User::className(), ['id' => 'participant_id']);
+    }
+    
+    public function add() {
+      // new participant from meeting invite
+      // lookup email as existing user
+      // if not exist, create user entry
+      // username, email and password
+      if ($user = $model->signup()) {
+          if (Yii::$app->getUser()->login($user)) {
+            $user = new User();
+            $user->username = $this->username;
+            $user->email = $this->email;
+            $user->setPassword($this->password);
+            $user->generateAuthKey();
+            $user->save();
+      }}
+      // return participant id
+      return ;
     }
 }

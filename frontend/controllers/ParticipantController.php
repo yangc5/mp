@@ -58,16 +58,28 @@ class ParticipantController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
+    public function actionCreate($meeting_id)
     {
         $model = new Participant();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        $model->meeting_id= $meeting_id;
+        $model->invited_by= Yii::$app->user->getId();
+        if ($model->load(Yii::$app->request->post())) {
+          // validate the form against model rules
+          if ($model->validate()) {
+              // all inputs are valid
+              $model->add();
+              // $model->save();              
+              return $this->redirect(['view', 'id' => $model->id]);
+          } else {
+              // validation failed
+              return $this->render('create', [
+                  'model' => $model,
+              ]);
+          }          
         } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
+          return $this->render('create', [
+              'model' => $model,
+          ]);          
         }
     }
 

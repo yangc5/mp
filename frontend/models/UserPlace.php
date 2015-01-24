@@ -105,5 +105,4 @@ class UserPlace extends \yii\db\ActiveRecord
               $up->save();  
             }            
     }
-    
 }
