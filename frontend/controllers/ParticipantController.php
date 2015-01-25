@@ -3,6 +3,7 @@
 namespace frontend\controllers;
 
 use Yii;
+use frontend\models\Meeting;
 use frontend\models\Participant;
 use frontend\models\ParticipantSearch;
 use yii\web\Controller;
@@ -60,6 +61,8 @@ class ParticipantController extends Controller
      */
     public function actionCreate($meeting_id)
     {
+      $mtg = new Meeting();
+      $title = $mtg->getMeetingTitle($meeting_id);
         $model = new Participant();
         $model->meeting_id= $meeting_id;
         $model->invited_by= Yii::$app->user->getId();
@@ -74,11 +77,13 @@ class ParticipantController extends Controller
               // validation failed
               return $this->render('create', [
                   'model' => $model,
+                'title' => $title,
               ]);
           }          
         } else {
           return $this->render('create', [
               'model' => $model,
+            'title' => $title,
           ]);          
         }
     }

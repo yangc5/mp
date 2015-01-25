@@ -37,6 +37,7 @@ class Meeting extends \yii\db\ActiveRecord
   const TYPE_BRUNCH = 90;
   const TYPE_OFFICE = 100;
   
+  public $title;
     /**
      * @inheritdoc
      */
@@ -158,4 +159,11 @@ class Meeting extends \yii\db\ActiveRecord
         self::TYPE_OTHER => 'Other',
          );
      }		
+     
+     public function getMeetingTitle($meeting_id) {
+        $meeting = Meeting::find()->where(['id' => $meeting_id])->one();
+        $title = $this->getMeetingType($meeting->meeting_type);
+        $title.=' Meeting';
+        return $title;
+     }
 }

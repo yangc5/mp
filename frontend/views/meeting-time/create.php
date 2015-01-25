@@ -9,7 +9,8 @@ use yii\helpers\Html;
 $this->title = Yii::t('frontend', 'Suggest {modelClass}', [
     'modelClass' => 'Meeting Time',
 ]);
-$this->params['breadcrumbs'][] = ['label' => Yii::t('frontend', 'Meeting Times'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('frontend', 'Meetings'), 'url' => ['/meeting/index']];
+$this->params['breadcrumbs'][] = ['label' => $title, 'url' => ['/meeting/view?id='.$model->meeting_id]];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="meeting-time-create">

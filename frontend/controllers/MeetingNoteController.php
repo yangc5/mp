@@ -3,6 +3,7 @@
 namespace frontend\controllers;
 
 use Yii;
+use frontend\models\Meeting;
 use frontend\models\MeetingNote;
 use frontend\models\MeetingNoteSearch;
 use yii\web\Controller;
@@ -46,7 +47,15 @@ class MeetingNoteController extends Controller
      */
     public function actionIndex()
     {
-      $this->redirect(Yii::getAlias('@web').'/meeting');
+//      $this->redirect(Yii::getAlias('@web').'/meeting');
+      
+        $searchModel = new MeetingNoteSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
     }
 
     /**
@@ -69,6 +78,8 @@ class MeetingNoteController extends Controller
     public function actionCreate($meeting_id)
     {
         $model = new MeetingNote();
+        $mtg = new Meeting();
+        $title = $mtg->getMeetingTitle($meeting_id);
         $model->meeting_id= $meeting_id;
         $model->posted_by= Yii::$app->user->getId();
         $model->status = self::STATUS_POSTED;
@@ -77,16 +88,18 @@ class MeetingNoteController extends Controller
           if ($model->validate()) {
               // all inputs are valid
               $model->save();              
-              return $this->redirect(['view', 'id' => $model->id]);
+              return $this->redirect(['/meeting/view', 'id' => $meeting_id]);
           } else {
               // validation failed
               return $this->render('create', [
                   'model' => $model,
+                  'title' => $title,
               ]);
           }          
         } else {
           return $this->render('create', [
               'model' => $model,
+              'title' => $title,
           ]);          
         }
     }

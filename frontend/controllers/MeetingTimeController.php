@@ -3,6 +3,7 @@
 namespace frontend\controllers;
 
 use Yii;
+use frontend\models\Meeting;
 use frontend\models\MeetingTime;
 use frontend\models\MeetingTimeSearch;
 use yii\web\Controller;
@@ -68,6 +69,8 @@ class MeetingTimeController extends Controller
      */
     public function actionCreate($meeting_id)
     {
+        $mtg = new Meeting();
+        $title = $mtg->getMeetingTitle($meeting_id);
         $model = new MeetingTime();
         $model->meeting_id= $meeting_id;
         $model->suggested_by= Yii::$app->user->getId();
@@ -79,16 +82,18 @@ class MeetingTimeController extends Controller
           if ($model->validate()) {
               // all inputs are valid
               $model->save();              
-              return $this->redirect(['view', 'id' => $model->id]);
+              return $this->redirect(['/meeting/view', 'id' => $model->meeting_id]);
           } else {
               // validation failed
               return $this->render('create', [
                   'model' => $model,
+                'title' => $title,
               ]);
           }          
         } else {
           return $this->render('create', [
               'model' => $model,
+            'title' => $title,
           ]);          
         }
     }

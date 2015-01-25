@@ -84,4 +84,11 @@ class MeetingTime extends \yii\db\ActiveRecord
     {
         return $this->hasOne(User::className(), ['id' => 'suggested_by']);
     }
+    
+    public function getFormattedStartTime()
+    {
+        // use yii\i18n\Formatter;
+      
+        //return asDatetime($this->start);
+    }
 }

@@ -44,6 +44,8 @@ class MeetingTimeSearch extends MeetingTime
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'sort'=> ['defaultOrder' => ['start'=>SORT_ASC]]
+            
         ]);
 
         $this->load($params);

@@ -24,7 +24,8 @@ use dosamigos\datetimepicker\DateTimePicker;
             'todayBtn' => true,
             'minuteStep'=> 15, 
             'pickerPosition' => 'bottom-left',
-            'startDate'=> "2013-02-14 10:00",
+            // to do - format one day ahead
+            //'startDate'=> "2013-02-14 10:00",
         ]
     ]);?>   
     

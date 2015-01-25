@@ -7,9 +7,9 @@ use yii\helpers\Html;
 
 $this->title = Yii::t('frontend', 'Update {modelClass}: ', [
     'modelClass' => 'Meeting',
-]) . ' ' . $model->id;
+]) . ' ' . $model->title;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('frontend', 'Meetings'), 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
+$this->params['breadcrumbs'][] = ['label' => $model->title, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = Yii::t('frontend', 'Update');
 ?>
 <div class="meeting-update">

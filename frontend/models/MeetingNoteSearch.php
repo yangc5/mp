@@ -45,8 +45,10 @@ class MeetingNoteSearch extends MeetingNote
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+             'sort'=> ['defaultOrder' => ['created_at'=>SORT_DESC]]
         ]);
 
+              
         $this->load($params);
 
         if (!$this->validate()) {

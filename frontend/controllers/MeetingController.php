@@ -5,6 +5,9 @@ namespace frontend\controllers;
 use Yii;
 use frontend\models\Meeting;
 use frontend\models\MeetingSearch;
+use frontend\models\MeetingNoteSearch;
+use frontend\models\MeetingPlaceSearch;
+use frontend\models\MeetingTimeSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -34,7 +37,7 @@ class MeetingController extends Controller
     {
         $searchModel = new MeetingSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
+        
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -48,8 +51,20 @@ class MeetingController extends Controller
      */
     public function actionView($id)
     {
+      $timeSearchModel = new MeetingTimeSearch();
+      $timeProvider = $timeSearchModel->search(['meeting_id'=>'id']);
+
+      $noteSearchModel = new MeetingNoteSearch();
+      $noteProvider = $noteSearchModel->search(['meeting_id'=>'id','sort'=>'created_at']);
+
+      $placeSearchModel = new MeetingplaceSearch();
+      $placeProvider = $placeSearchModel->search(['meeting_id'=>'id']);
+
         return $this->render('view', [
             'model' => $this->findModel($id),
+            'timeProvider' => $timeProvider,
+            'noteProvider' => $noteProvider,
+            'placeProvider' => $placeProvider,
         ]);
     }
 
@@ -90,6 +105,7 @@ class MeetingController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $model->title = $model->getMeetingTitle($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
