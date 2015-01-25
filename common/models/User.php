@@ -24,8 +24,11 @@ use yii\web\IdentityInterface;
  */
 class User extends ActiveRecord implements IdentityInterface
 {
+    // note: validation rule uses range of status variables
     const STATUS_DELETED = 0;
     const STATUS_ACTIVE = 10;
+    const STATUS_PASSIVE = 20;
+    
     const ROLE_USER = 10;
 
     /**
@@ -53,7 +56,7 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return [
             ['status', 'default', 'value' => self::STATUS_ACTIVE],
-            ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
+            ['status', 'in', 'range' => [self::STATUS_PASSIVE, self::STATUS_DELETED]],
 
             ['role', 'default', 'value' => self::ROLE_USER],
             ['role', 'in', 'range' => [self::ROLE_USER]],

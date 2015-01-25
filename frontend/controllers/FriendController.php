@@ -61,14 +61,30 @@ class FriendController extends Controller
     public function actionCreate()
     {
         $model = new Friend();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        $model->user_id = Yii::$app->user->getId();
+        if ($model->load(Yii::$app->request->post())) {
+          // get user_id of email
+          $user_id = $model->lookupEmail($model->email);
+          if ($user_id===false) {
+            $user_id = $model->addUser($model->email);            
+          } 
+          $model->friend_id = $user_id;          
+          // validate the form against model rules
+          if ($model->validate()) {
+              // all inputs are valid
+              $model->save();
+              return $this->redirect(['view', 'id' => $model->id]);
+          } else {
+              // validation failed
+              return $this->render('create', [
+                  'model' => $model,
+              ]);
+          }          
         } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
-        }
+          return $this->render('create', [
+              'model' => $model,
+          ]);          
+        }               
     }
 
     /**

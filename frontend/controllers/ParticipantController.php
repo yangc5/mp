@@ -66,7 +66,16 @@ class ParticipantController extends Controller
         $model = new Participant();
         $model->meeting_id= $meeting_id;
         $model->invited_by= Yii::$app->user->getId();
+        // to do move into model
+        // load user's friends into email list array for autocomplete
+        $friend_list = \frontend\models\Friend::find()->where(['user_id' => Yii::$app->user->getId()])->all();
+        $email_list = [];
+        foreach ($friend_list as $x) {
+          $email_list[] = $x->friend->email;
+        }
         if ($model->load(Yii::$app->request->post())) {
+          // to do fix saving and validation
+          // add new user when needed
           // validate the form against model rules
           if ($model->validate()) {
               // all inputs are valid
@@ -78,12 +87,14 @@ class ParticipantController extends Controller
               return $this->render('create', [
                   'model' => $model,
                 'title' => $title,
+                'friends'=>$email_list,
               ]);
           }          
         } else {
           return $this->render('create', [
               'model' => $model,
             'title' => $title,
+            'friends'=>$email_list,
           ]);          
         }
     }

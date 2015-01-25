@@ -21,7 +21,8 @@
         "2amigos/yii2-google-maps-library": "*",
         "2amigos/yii2-google-places-library": "*",
         "stichoza/google-translate-php": "~2.0",
-        "2amigos/yii2-date-time-picker-widget": "*"
+        "2amigos/yii2-date-time-picker-widget": "*",
+        "yiisoft/yii2-jui": "*"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

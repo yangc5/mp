@@ -11,9 +11,19 @@ use yii\widgets\ActiveForm;
 <div class="participant-form">
 
     <?php $form = ActiveForm::begin(); ?>
-        
-    <?= $form->field($model, 'email')->textInput(['maxlength' => 255]) ?>
 
+    <p>Email address:</p>
+    <?php 
+      // preload friends into array
+      echo yii\jui\AutoComplete::widget([
+          'model' => $model,
+          'attribute' => 'email',
+          'clientOptions' => [
+          'source' => $friends,
+           ],
+          ]);        
+    ?>
+    <p></p>
     <!-- todo - offer drop down of friends -->
 
     <? // $form->field($model, 'meeting_id')->textInput() ?>

@@ -75,8 +75,8 @@ class UserContactController extends Controller
     public function actionCreate()
     {
         $model = new UserContact();
-		if ($model->load(Yii::$app->request->post())) {
-			$form = Yii::$app->request->post();
+		    if ($model->load(Yii::$app->request->post())) {
+			    $form = Yii::$app->request->post();
             if (!is_numeric($model->contact_type)) {
                $model->contact_type=UserContact::TYPE_OTHER;
             }

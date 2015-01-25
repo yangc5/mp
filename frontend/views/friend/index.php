@@ -25,11 +25,17 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            'friend_id',
-            //'status',
+          [
+            'label'=>'Email',
+              'attribute' => 'friend_id',
+              'format' => 'raw',
+              'value' => function ($model) {                      
+                          return '<div>'.\common\models\User::find()->where(['id'=>$model->friend_id])->one()->email.'</div>';
+                  },
+          ],
             'number_meetings',
             // 'is_favorite',
-
+            //'status',
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
