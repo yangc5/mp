@@ -109,7 +109,7 @@ class Friend extends \yii\db\ActiveRecord
       $user->email = $email;
       $user->username = $email;
       $user->status = User::STATUS_PASSIVE;
-      $user->setPassword($this->generatePassword(8));
+      $user->setPassword( Yii::$app->security->generateRandomString());
       $user->generateAuthKey();
       $user->save();
       return $user->id;

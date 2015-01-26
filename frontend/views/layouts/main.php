@@ -47,8 +47,14 @@ AppAsset::register($this);
       					['label' => Yii::t('frontend','Contact us'), 'url' => ['/site/contact']],
       				],
       			];    
-      			if (!Yii::$app->user->isGuest) {
-      				$menuItems[] = [
+      			if (Yii::$app->user->isGuest) {
+      			  echo Nav::widget([
+                  'options' => ['class' => 'navbar-nav navbar-right'],
+                  'items' => $menuItems,
+              ]);
+            } else {
+              
+      				$menuItems[] = [              
       				            'label' => 'Account',
       				            'items' => [
     				                 [
@@ -70,11 +76,11 @@ AppAsset::register($this);
       				                ],
       				            ],
       				        ];				
+                      echo Nav::widget([
+                          'options' => ['class' => 'navbar-nav navbar-right'],
+                          'items' => $menuItems,
+                      ]);
       			}            			
-            echo Nav::widget([
-                'options' => ['class' => 'navbar-nav navbar-right'],
-                'items' => $menuItems,
-            ]);
             NavBar::end();
         ?>
 

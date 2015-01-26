@@ -15,6 +15,11 @@ class m150124_003721_create_user_setting_table extends Migration
       $this->createTable('{{%user_setting}}', [
           'id' => Schema::TYPE_PK,
           'user_id' => Schema::TYPE_BIGINT.' NOT NULL',
+          'filename' => Schema::TYPE_STRING.' NOT NULL',
+          'avatar' => Schema::TYPE_STRING.' NOT NULL',
+          'avatar_square' => Schema::TYPE_STRING.' NOT NULL',
+          'avatar_small' => Schema::TYPE_STRING.' NOT NULL',
+          'no_email' => Schema::TYPE_SMALLINT.' NOT NULL',
           // much more to add here
           'created_at' => Schema::TYPE_INTEGER . ' NOT NULL',
           'updated_at' => Schema::TYPE_INTEGER . ' NOT NULL',

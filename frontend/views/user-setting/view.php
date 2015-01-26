@@ -13,6 +13,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="user-setting-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
+    <div class="col-md-8">
 
     <p>
         <?= Html::a(Yii::t('frontend', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
@@ -34,5 +35,9 @@ $this->params['breadcrumbs'][] = $this->title;
             'updated_at',
         ],
     ]) ?>
+    </div> <!-- end col-md-8 -->
+    <div class="col-md-4">
+      <?= '<img src="'.Yii::getAlias('@web').'/uploads/avatar/'.$model->avatar_square.'"/>' ?>
+    </div> <!-- end col-md-4 -->
 
 </div>
