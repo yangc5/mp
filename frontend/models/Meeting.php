@@ -36,6 +36,11 @@ class Meeting extends \yii\db\ActiveRecord
   const TYPE_DRINKS = 80;
   const TYPE_BRUNCH = 90;
   const TYPE_OFFICE = 100;
+
+  const STATUS_PLANNING =0;
+  const STATUS_CONFIRMED = 20;
+  const STATUS_COMPLETED = 40;
+  const STATUS_CANCELED = 60;
   
   public $title;
     /**

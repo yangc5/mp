@@ -30,10 +30,21 @@ class UserSettingController extends Controller
     }
 
     /**
-     * Lists all UserSetting models.
+     * Default path - redirect to update
      * @return mixed
      */
     public function actionIndex()
+    {
+      // returns record id not user_id
+      $id = UserSetting::initialize(Yii::$app->user->getId());
+      return $this->redirect(['update', 'id' => $id]);
+    }
+
+    /**
+     * Lists all UserSetting models.
+     * @return mixed
+     */
+    public function actionAdmin()
     {
         $searchModel = new UserSettingSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
@@ -57,50 +68,6 @@ class UserSettingController extends Controller
     }
 
     /**
-     * Creates a new UserSetting model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
-     */
-    public function actionCreate()
-    {
-        $model = new UserSetting();
-        if ($model->load(Yii::$app->request->post())) {
-          $model->user_id = Yii::$app->user->getId();
-            Yii::$app->params['uploadPath'] = Yii::$app->basePath . '/web/uploads/avatar/';
-           $image = UploadedFile::getInstance($model, 'image');
-           // store the source file name
-          $model->filename = $image->name;
-          $ext = end((explode(".", $image->name)));
-          // generate a unique file name
-          $model->avatar = Yii::$app->security->generateRandomString().".{$ext}";
-          $model->avatar_square = Yii::$app->security->generateRandomString().".{$ext}";
-          $model->avatar_small = Yii::$app->security->generateRandomString().".{$ext}";
-          // the path to save file, you can set an uploadPath
-          // in Yii::$app->params (as used in example below)
-          $path = Yii::$app->params['uploadPath'] . $model->avatar;
-
-          if($model->save()){
-            
-            $image->saveAs($path);
-
-            Image::thumbnail(Yii::$app->params['uploadPath'].$model->avatar, 120, 120)
-                ->save(Yii::$app->params['uploadPath'].$model->avatar_square, ['quality' => 50]);
-              Image::thumbnail(Yii::$app->params['uploadPath'].$model->avatar, 30, 30)
-                    ->save(Yii::$app->params['uploadPath'].$model->avatar_small, ['quality' => 50]);
-            return $this->redirect(['view', 'id' => $model->id]);
-          } else {
-            // error in saving model
-            var_dump($model->getErrors());
-            echo 'error';die();
-          }
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
-        }
-    }
-
-    /**
      * Updates an existing UserSetting model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
@@ -108,41 +75,44 @@ class UserSettingController extends Controller
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
-
+        $model = new UserSetting;
+        $model = $this->findModel($id);        
         if ($model->load(Yii::$app->request->post())) {
-          $model->user_id = Yii::$app->user->getId();
-          Yii::$app->params['uploadPath'] = Yii::$app->basePath . '/web/uploads/avatar/';
-           $image = UploadedFile::getInstance($model, 'image');
-           // store the source file name
-          $model->filename = $image->name;
-          $ext = end((explode(".", $image->name)));
-          // generate a unique file name
-          $model->avatar = Yii::$app->security->generateRandomString().".{$ext}";
-          $model->avatar_square = Yii::$app->security->generateRandomString().".{$ext}";
-          $model->avatar_small = Yii::$app->security->generateRandomString().".{$ext}";
           // the path to save file, you can set an uploadPath
           // in Yii::$app->params (as used in example below)
-          $path = Yii::$app->params['uploadPath'] . $model->avatar;
-
-          if($model->save()){
-            $image->saveAs($path);
-            
-            Image::thumbnail(Yii::$app->params['uploadPath'].$model->avatar, 120, 120)
-                ->save(Yii::$app->params['uploadPath'].$model->avatar_square, ['quality' => 50]);
-              Image::thumbnail(Yii::$app->params['uploadPath'].$model->avatar, 30, 30)
-                    ->save(Yii::$app->params['uploadPath'].$model->avatar_small, ['quality' => 50]);
-
-            return $this->redirect(['view', 'id' => $model->id]);
-          } else {
-            // error in saving model
-            echo 'error';die();
-          }
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
+          Yii::$app->params['uploadPath'] = Yii::$app->basePath . '/web/uploads/avatar/';
+           $image = UploadedFile::getInstance($model, 'image');
+           if (!is_null($image)) {
+             // path to existing image for post-delete
+             $image_delete = $model->avatar;
+             // save new image
+              // store the source file name
+             $model->filename = $image->name;
+             $ext = end((explode(".", $image->name)));
+             // generate a unique file name to prevent duplicate filenames
+             $model->avatar = Yii::$app->security->generateRandomString().".{$ext}";
+             $model->user_id = Yii::$app->user->getId();
+             if($model->save()){
+               $path = Yii::$app->params['uploadPath'] . $model->avatar;
+               $image->saveAs($path);            
+               Image::thumbnail(Yii::$app->params['uploadPath'].$model->avatar, 120, 120)
+                   ->save(Yii::$app->params['uploadPath'].'sqr_'.$model->avatar, ['quality' => 50]);
+               Image::thumbnail(Yii::$app->params['uploadPath'].$model->avatar, 30, 30)
+                       ->save(Yii::$app->params['uploadPath'].'sm_'.$model->avatar, ['quality' => 50]);
+                $model->deleteImage(Yii::$app->params['uploadPath'],$image_delete);
+             } else {
+               // error in saving model
+               // pass thru to form
+             }             
+           } else {
+             // simple save
+             $model->save();
+             // pass thru to form
+           }
         }
+        return $this->render('update', [
+            'model' => $model,
+        ]);
     }
 
     /**

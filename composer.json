@@ -25,7 +25,9 @@
         "yiisoft/yii2-jui": "*",
         "cebe/yii2-gravatar": "*",
         "kartik-v/yii2-widget-fileinput": "*",
-        "yiisoft/yii2-imagine": "*"
+        "yiisoft/yii2-imagine": "*",
+        "2amigos/yii2-switch-widget": "0.1.*",
+        "2amigos/yii2-resource-manager-component": "0.1.*"
         
             },
     "require-dev": {

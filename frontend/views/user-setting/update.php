@@ -5,12 +5,10 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model frontend\models\UserSetting */
 
-$this->title = Yii::t('frontend', 'Update {modelClass}: ', [
-    'modelClass' => 'User Setting',
-]) . ' ' . $model->id;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('frontend', 'User Settings'), 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = Yii::t('frontend', 'Update');
+$this->title = Yii::t('frontend', 'Update {modelClass}', [
+    'modelClass' => 'Your Settings',
+]);
+$this->params['breadcrumbs'][] = Yii::t('frontend', 'User Settings');
 ?>
 <div class="user-setting-update">
 

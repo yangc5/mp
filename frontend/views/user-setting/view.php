@@ -37,7 +37,7 @@ $this->params['breadcrumbs'][] = $this->title;
     ]) ?>
     </div> <!-- end col-md-8 -->
     <div class="col-md-4">
-      <?= '<img src="'.Yii::getAlias('@web').'/uploads/avatar/'.$model->avatar_square.'"/>' ?>
+      <?= '<img src="'.Yii::getAlias('@web').'/uploads/avatar/sqr_'.$model->avatar.'"/>' ?>
     </div> <!-- end col-md-4 -->
 
 </div>

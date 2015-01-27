@@ -21,9 +21,18 @@ use yii\db\ActiveRecord;
  */
 class UserContact extends \yii\db\ActiveRecord
 {
-	const TYPE_OTHER = 0;
+    const TYPE_OTHER = 0;
     const TYPE_PHONE = 10;
     const TYPE_SKYPE = 20;
+    const TYPE_FACEBOOK = 30;
+    const TYPE_GOOGLE = 40;
+    const TYPE_MSN = 50;
+    const TYPE_AIM = 60;
+    const TYPE_YAHOO = 70;
+    const TYPE_ICQ = 80;
+    const TYPE_JABBER = 90;
+    const TYPE_QQ = 100;
+    const TYPE_GADU = 110;
 
 	const STATUS_ACTIVE = 0;
 	const STATUS_INACTIVE = 10;
@@ -97,7 +106,16 @@ class UserContact extends \yii\db\ActiveRecord
       return array(
           self::TYPE_PHONE => 'Phone',
           self::TYPE_SKYPE => 'Skype',
-          self::TYPE_OTHER => 'Other'
+          self::TYPE_OTHER => 'Other',
+          self::TYPE_FACEBOOK => 'Facebook Messenger',
+          self::TYPE_GOOGLE => 'Google Talk',
+          self::TYPE_MSN => 'MSN Messenger',
+          self::TYPE_AIM => 'AIM',
+          self::TYPE_YAHOO => 'Yahoo! Messenger',
+          self::TYPE_ICQ => 'ICQ',
+          self::TYPE_JABBER => 'Jabber',
+          self::TYPE_QQ => 'QQ',
+          self::TYPE_GADU => 'Gadu-Gadu',
          );
      }
 }

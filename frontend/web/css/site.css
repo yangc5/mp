@@ -90,6 +90,10 @@ a.desc:after {
     margin: 0 0 15px 0;
 }
 
+.vertical-pad {
+  margin-top:25px;
+}
+
 .profile-image {
   border:1px solid black;
 }

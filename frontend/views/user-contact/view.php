@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /* @var $model frontend\models\UserContact */
 
 $this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('frontend', 'User Contacts'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('frontend', 'Contact Information'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="user-contact-view">
