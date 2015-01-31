@@ -26,7 +26,7 @@ return [
                       'place/view/<id:\d+>' => 'place/view',  
                       'place/update/<id:\d+>' => 'place/update',  
                       'place/<slug>' => 'place/slug',
-					  'defaultRoute' => '/site/index',
+					            'defaultRoute' => '/site/index',
                   ],
               ],
         'user' => [

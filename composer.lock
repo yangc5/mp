@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "6e1d750ebbe4400d397067deb9e478d5",
+    "hash": "e391341b0a89ae3e87e057686a1961d8",
     "packages": [
         {
             "name": "2amigos/yii2-date-time-picker-widget",
@@ -189,49 +189,6 @@
                 "yii"
             ],
             "time": "2014-02-19 11:01:22"
-        },
-        {
-            "name": "2amigos/yii2-switch-widget",
-            "version": "0.1.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/2amigos/yii2-switch-widget.git",
-                "reference": "1434cb429d853f4ff38f76c7f9c3cdfae9ffe11e"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/2amigos/yii2-switch-widget/zipball/1434cb429d853f4ff38f76c7f9c3cdfae9ffe11e",
-                "reference": "1434cb429d853f4ff38f76c7f9c3cdfae9ffe11e",
-                "shasum": ""
-            },
-            "require": {
-                "yiisoft/yii2": "*"
-            },
-            "type": "yii2-extension",
-            "autoload": {
-                "psr-4": {
-                    "dosamigos\\switchinput\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Antonio Ramirez",
-                    "email": "ramirez.cobos@gmail.com",
-                    "homepage": "http://www.ramirezcobos.com"
-                }
-            ],
-            "description": "Bootstrap Switch widget for Yii2.",
-            "keywords": [
-                "extension",
-                "switch",
-                "widget",
-                "yii"
-            ],
-            "time": "2014-05-15 13:51:59"
         },
         {
             "name": "aws/aws-sdk-php",
@@ -422,16 +379,16 @@
         },
         {
             "name": "bower-asset/jquery.inputmask",
-            "version": "3.1.57",
+            "version": "3.1.59",
             "source": {
                 "type": "git",
                 "url": "https://github.com/RobinHerbots/jquery.inputmask.git",
-                "reference": "d180082aa1ba98c85f85b2c4eebbfa195fd25613"
+                "reference": "6fcd2cf28ee111f8aadcd42a1b8d43d6f7a5c0ba"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/RobinHerbots/jquery.inputmask/zipball/d180082aa1ba98c85f85b2c4eebbfa195fd25613",
-                "reference": "d180082aa1ba98c85f85b2c4eebbfa195fd25613",
+                "url": "https://api.github.com/repos/RobinHerbots/jquery.inputmask/zipball/6fcd2cf28ee111f8aadcd42a1b8d43d6f7a5c0ba",
+                "reference": "6fcd2cf28ee111f8aadcd42a1b8d43d6f7a5c0ba",
                 "shasum": ""
             },
             "require": {
@@ -467,7 +424,7 @@
                 "form",
                 "input",
                 "inputmask",
-                "jQuery",
+                "jquery",
                 "mask",
                 "plugins"
             ]
@@ -990,16 +947,16 @@
         },
         {
             "name": "kartik-v/yii2-krajee-base",
-            "version": "v1.7.2",
+            "version": "v1.7.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kartik-v/yii2-krajee-base.git",
-                "reference": "c6eb0ccafa100c7e14a8635c653f9875faa1c61c"
+                "reference": "a6bd683be7a50720e4a3c8efd74b80bf5331dd69"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kartik-v/yii2-krajee-base/zipball/c6eb0ccafa100c7e14a8635c653f9875faa1c61c",
-                "reference": "c6eb0ccafa100c7e14a8635c653f9875faa1c61c",
+                "url": "https://api.github.com/repos/kartik-v/yii2-krajee-base/zipball/a6bd683be7a50720e4a3c8efd74b80bf5331dd69",
+                "reference": "a6bd683be7a50720e4a3c8efd74b80bf5331dd69",
                 "shasum": ""
             },
             "require": {
@@ -1032,7 +989,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2015-01-21 18:03:16"
+            "time": "2015-01-25 16:21:06"
         },
         {
             "name": "kartik-v/yii2-widget-fileinput",
@@ -1083,6 +1040,56 @@
                 "yii2"
             ],
             "time": "2014-11-09 04:40:36"
+        },
+        {
+            "name": "kartik-v/yii2-widget-switchinput",
+            "version": "v1.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kartik-v/yii2-widget-switchinput.git",
+                "reference": "f6fd88e978b526323538b62ffd9d8845a9799758"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kartik-v/yii2-widget-switchinput/zipball/f6fd88e978b526323538b62ffd9d8845a9799758",
+                "reference": "f6fd88e978b526323538b62ffd9d8845a9799758",
+                "shasum": ""
+            },
+            "require": {
+                "kartik-v/yii2-krajee-base": "*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "kartik\\switchinput\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD 3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Kartik Visweswaran",
+                    "email": "kartikv2@gmail.com",
+                    "homepage": "http://www.krajee.com/"
+                }
+            ],
+            "description": "A Yii2 wrapper widget for the Bootstrap Switch plugin to use checkboxes & radios as toggle switchinputes (sub repo split from yii2-widgets)",
+            "homepage": "https://github.com/kartik-v/yii2-widget-switchinput",
+            "keywords": [
+                "bootstrap",
+                "extension",
+                "form",
+                "input",
+                "jquery",
+                "plugin",
+                "switchinput",
+                "toggle",
+                "widget",
+                "yii2"
+            ],
+            "time": "2015-01-14 16:27:26"
         },
         {
             "name": "stichoza/google-translate-php",

@@ -10,6 +10,7 @@ use yii\widgets\ListView;
 $this->title = $model->getMeetingType($model->meeting_type) .' '.Yii::t('frontend', 'Meeting');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('frontend', 'Meetings'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
+
 ?>
 <div class="meeting-view">
 
@@ -27,23 +28,47 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a(Yii::t('frontend', 'Add Note'), ['/meeting-note/create', 'meeting_id' => $model->id], ['class' => 'btn btn-primary']) ?>
         </p>
 
-        <h3><?= Yii::t('frontend','Places') ?></h3>
-        <?= ListView::widget([ 
-               'dataProvider' => $placeProvider, 
-               'itemOptions' => ['class' => 'item'], 
-               'layout' => '{items}',
-               'itemView' => '../meeting-place/_list', 
-           ]) ?>
+       <div class="panel panel-default">
+         <!-- Default panel contents -->
+         <div class="panel-heading"><h4><?= Yii::t('frontend','Places') ?></h4></div>
 
-        <h3><?= Yii::t('frontend','Dates &amp; Times') ?></h3>
-        <?= ListView::widget([ 
-               'dataProvider' => $timeProvider, 
-               'itemOptions' => ['class' => 'item'], 
-               'layout' => '{items}',
-               'itemView' => '../meeting-time/_list', 
-           ]) ?>
+         <!-- Table -->
+         <table class="table">
+           </thead>
+           <?= ListView::widget([ 
+                  'dataProvider' => $placeProvider, 
+                  'itemOptions' => ['class' => 'item'], 
+                  'layout' => '{items}',
+                  'itemView' => '../meeting-place/_list', 
+              ]) ?>
+         </table>
+       </div>
+                       
 
-        <h3><?= Yii::t('frontend','Notes') ?></h3>
+        <div class="panel panel-default">
+          <!-- Default panel contents -->
+          <div class="panel-heading"><h4><?= Yii::t('frontend','Dates &amp; Times') ?></h4></div>
+
+          <!-- Table -->
+          <table class="table">
+             <thead>
+             <tr>
+               <td></td>
+               <td>You</td>
+               <td>Them</td>
+               <td>Choose</td>
+            </tr>
+            <?= ListView::widget([ 
+                   'dataProvider' => $timeProvider, 
+                   'itemOptions' => ['class' => 'item'], 
+                   'layout' => '{items}',
+                   'itemView' => '../meeting-time/_list', 
+               ]) ?>
+          </table>
+        </div>
+
+           <h4><?= Yii::t('frontend','Notes') ?></h4>
+
         <?= ListView::widget([ 
                'dataProvider' => $noteProvider, 
                'itemOptions' => ['class' => 'item'], 
