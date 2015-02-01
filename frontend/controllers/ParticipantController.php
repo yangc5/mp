@@ -83,6 +83,8 @@ class ParticipantController extends Controller
               // $model->save();              
               return $this->redirect(['view', 'id' => $model->id]);
           } else {
+            var_dump($model->getErrors());
+            die();
               // validation failed
               return $this->render('create', [
                   'model' => $model,

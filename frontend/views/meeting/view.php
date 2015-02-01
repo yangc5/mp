@@ -14,65 +14,50 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="meeting-view">
 
-   <h1><?= Html::encode($this->title) ?></h1>
-  <p>
-  <?= $model->message ?>
-  </p>
-      
-    <p>
-      <?= Html::a(Yii::t('frontend', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+  <div class="panel panel-default">
+    <!-- Default panel contents -->
+    <div class="panel-heading">
+      <div class="row">
+        <div class="col-lg-12"><h1><?= Html::encode($this->title) ?></h1></div>
+      </div>  
+    </div>
+    <div class="panel-body">
+    <?= $model->message ?>
+    </div>
+    <div class="panel-footer">
+      <div class="row">
+        <div class="col-lg-6"></div>
+        <div class="col-lg-6" >
+          <div style="float:right;">
+          <?= Html::a(Yii::t('frontend', 'Send'), ['finalize', 'id' => $model->id], ['class' => 'btn btn-primary disabled']) ?>
 
-      <?= Html::a(Yii::t('frontend', 'Invite Participant'), ['/participant/create', 'meeting_id' => $model->id], ['class' => 'btn btn-primary']) ?>
-      <?= Html::a(Yii::t('frontend', 'Add Place'), ['/meeting-place/create', 'meeting_id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a(Yii::t('frontend', 'Add Time'), ['/meeting-time/create', 'meeting_id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a(Yii::t('frontend', 'Add Note'), ['/meeting-note/create', 'meeting_id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        </p>
+          <?= Html::a(Yii::t('frontend', 'Finalize'), ['finalize', 'id' => $model->id], ['class' => 'btn btn-primary disabled']) ?>
+          <?= Html::a('', ['finalize', 'id' => $model->id], ['class' => 'btn btn-primary glyphicon glyphicon-remove','title'=>'Cancel']) ?>
 
-       <div class="panel panel-default">
-         <!-- Default panel contents -->
-         <div class="panel-heading"><h4><?= Yii::t('frontend','Places') ?></h4></div>
-
-         <!-- Table -->
-         <table class="table">
-           </thead>
-           <?= ListView::widget([ 
-                  'dataProvider' => $placeProvider, 
-                  'itemOptions' => ['class' => 'item'], 
-                  'layout' => '{items}',
-                  'itemView' => '../meeting-place/_list', 
-              ]) ?>
-         </table>
-       </div>
-                       
-
-        <div class="panel panel-default">
-          <!-- Default panel contents -->
-          <div class="panel-heading"><h4><?= Yii::t('frontend','Dates &amp; Times') ?></h4></div>
-
-          <!-- Table -->
-          <table class="table">
-             <thead>
-             <tr>
-               <td></td>
-               <td>You</td>
-               <td>Them</td>
-               <td>Choose</td>
-            </tr>
-            <?= ListView::widget([ 
-                   'dataProvider' => $timeProvider, 
-                   'itemOptions' => ['class' => 'item'], 
-                   'layout' => '{items}',
-                   'itemView' => '../meeting-time/_list', 
-               ]) ?>
-          </table>
+          <?= Html::a('', ['update', 'id' => $model->id], ['class' => 'btn btn-primary glyphicon glyphicon-pencil','title'=>'Edit']) ?>
+          </div>
         </div>
+    </div> <!-- end row -->
+    </div>
+   </div>
 
-           <h4><?= Yii::t('frontend','Notes') ?></h4>
+        <?= $this->render('../participant/_panel', [
+            'model'=>$model,
+        ]) ?>
+        
+        <?= $this->render('../meeting-place/_panel', [
+            'model'=>$model,
+            'placeProvider' => $placeProvider,
+        ]) ?>
+                       
+        <?= $this->render('../meeting-time/_panel', [
+            'model'=>$model,
+            'timeProvider' => $timeProvider,
+        ]) ?>
+        
+        <?= $this->render('../meeting-note/_panel', [
+            'model'=>$model,
+            'noteProvider' => $noteProvider,
+        ]) ?>
 
-        <?= ListView::widget([ 
-               'dataProvider' => $noteProvider, 
-               'itemOptions' => ['class' => 'item'], 
-               'layout' => '{items}',
-               'itemView' => '../meeting-note/_list', 
-           ]) ?>
 </div>

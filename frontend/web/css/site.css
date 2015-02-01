@@ -97,3 +97,8 @@ a.desc:after {
 .profile-image {
   border:1px solid black;
 }
+
+tr.small-header {
+  font-weight:bold;
+  font-style:italic;
+}

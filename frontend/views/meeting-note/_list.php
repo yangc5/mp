@@ -4,13 +4,18 @@ use yii\helpers\Html;
 
 ?>
 
-<div class="panel panel-default">
-  <div class="panel-body">
+<tr > 
+  <td style >
     <div class="meeting-note-view">
-
+      <div>
         <?= $model->note ?>
-
-    </div>
-  </div>
+        </div>
+        <div style="float:right;font-style:italic;">
+        By: <?= $model->postedBy->email ?>
+          </div>
+        </div>
+</td>
+</tr>
+  
 </div>
 

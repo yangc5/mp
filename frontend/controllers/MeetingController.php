@@ -145,4 +145,7 @@ class MeetingController extends Controller
         }
     }
     
+    public function actionSwitch($id,$val) {
+      return $id.' '.$val;
+    }
 }

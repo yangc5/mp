@@ -4,6 +4,8 @@ namespace frontend\models;
 
 use Yii;
 use yii\db\ActiveRecord;
+use common\models\User;
+
 
 /**
  * This is the model class for table "meeting_note".

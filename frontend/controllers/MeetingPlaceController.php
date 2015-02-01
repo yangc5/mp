@@ -77,7 +77,7 @@ class MeetingPlaceController extends Controller
            if ($model->validate()) {
                // all inputs are valid
                $model->save();              
-               return $this->redirect(['view', 'id' => $model->id]);
+               return $this->redirect(['/meeting/view', 'id' => $meeting_id]);
            } else {
                // validation failed
                return $this->render('create', [
