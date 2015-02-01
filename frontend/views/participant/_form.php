@@ -9,9 +9,10 @@ use yii\widgets\ActiveForm;
 ?>
 
 <div class="participant-form">
-
     <?php $form = ActiveForm::begin(); ?>
-
+    
+    <?= $form->errorSummary($model); ?>
+    
     <p>Email address:</p>
     <?php 
       // preload friends into array

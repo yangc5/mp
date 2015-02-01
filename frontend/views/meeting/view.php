@@ -43,6 +43,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
         <?= $this->render('../participant/_panel', [
             'model'=>$model,
+            'participantProvider' => $participantProvider,
         ]) ?>
         
         <?= $this->render('../meeting-place/_panel', [

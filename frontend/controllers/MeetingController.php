@@ -3,11 +3,13 @@
 namespace frontend\controllers;
 
 use Yii;
+use yii\data\ActiveDataProvider;
 use frontend\models\Meeting;
 use frontend\models\MeetingSearch;
-use frontend\models\MeetingNoteSearch;
-use frontend\models\MeetingPlaceSearch;
-use frontend\models\MeetingTimeSearch;
+use frontend\models\Participant;
+use frontend\models\MeetingNote;
+use frontend\models\MeetingPlace;
+use frontend\models\MeetingTime;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -51,17 +53,25 @@ class MeetingController extends Controller
      */
     public function actionView($id)
     {
-      $timeSearchModel = new MeetingTimeSearch();
-      $timeProvider = $timeSearchModel->search(['meeting_id'=>'id']);
+      $timeProvider = new ActiveDataProvider([
+          'query' => MeetingTime::find()->where(['meeting_id'=>$id]),
+      ]);
 
-      $noteSearchModel = new MeetingNoteSearch();
-      $noteProvider = $noteSearchModel->search(['meeting_id'=>'id','sort'=>'created_at']);
+      $noteProvider = new ActiveDataProvider([
+          'query' => MeetingNote::find()->where(['meeting_id'=>$id]),
+      ]);
 
-      $placeSearchModel = new MeetingplaceSearch();
-      $placeProvider = $placeSearchModel->search(['meeting_id'=>'id']);
+      $placeProvider = new ActiveDataProvider([
+          'query' => MeetingPlace::find()->where(['meeting_id'=>$id]),
+      ]);
 
+      $participantProvider = new ActiveDataProvider([
+          'query' => Participant::find()->where(['meeting_id'=>$id]),
+      ]);
+//      $participantProvider = $participantSearchModel->find()->where(['meeting_id'=>$id])->all();
         return $this->render('view', [
             'model' => $this->findModel($id),
+            'participantProvider' => $participantProvider,
             'timeProvider' => $timeProvider,
             'noteProvider' => $noteProvider,
             'placeProvider' => $placeProvider,

@@ -4,7 +4,7 @@ namespace frontend\models;
 
 use Yii;
 use yii\db\ActiveRecord;
-
+use common\models\User;
 /**
  * This is the model class for table "participant".
  *
@@ -58,17 +58,11 @@ class Participant extends \yii\db\ActiveRecord
           // the email attribute should be a valid email address
             ['email', 'email'],            
             [['meeting_id', 'participant_id', 'invited_by', 'status', 'created_at', 'updated_at'], 'integer'],
-              ['username', 'filter', 'filter' => 'trim'],
-              ['username', 'required'],
-              ['username', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This username has already been taken.'],
-              ['username', 'string', 'min' => 2, 'max' => 255],
               ['email', 'filter', 'filter' => 'trim'],
               ['email', 'required'],
               ['email', 'email'],
-              ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This email address has already been taken.'],
-
-              ['password', 'required'],
-              ['password', 'string', 'min' => 6],
+//              ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This email address has already been taken.'],
+            ['participant_id', 'compare','compareAttribute'=>'invited_by','operator'=>'!=','message'=>'You cannot invite yourself.'],
             
         ];
     }
@@ -113,21 +107,17 @@ class Participant extends \yii\db\ActiveRecord
         return $this->hasOne(User::className(), ['id' => 'participant_id']);
     }
     
-    public function add() {
+    public function addUser() {
       // new participant from meeting invite
       // lookup email as existing user
       // if not exist, create user entry
       // username, email and password
-      if ($user = $model->signup()) {
-          if (Yii::$app->getUser()->login($user)) {
-            $user = new User();
-            $user->username = $this->username;
-            $user->email = $this->email;
-            $user->setPassword($this->password);
-            $user->generateAuthKey();
-            $user->save();
-      }}
-      // return participant id
-      return ;
+          $user = new User();
+          $user->username = $this->username;
+          $user->email = $this->email;
+          $user->setPassword($this->password);
+          $user->generateAuthKey();
+          $user->save();
+      return $user->id;
     }
 }

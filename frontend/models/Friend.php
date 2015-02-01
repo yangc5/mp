@@ -126,4 +126,13 @@ class Friend extends \yii\db\ActiveRecord
         return $result;
     }
     
+    public static function getFriendList($user_id) {
+      // load user's friends into email list array for autocomplete
+      $friend_list = \frontend\models\Friend::find()->where(['user_id' => $user_id])->all();
+      $email_list = [];
+      foreach ($friend_list as $x) {
+        $email_list[] = $x->friend->email;
+      }
+      return $email_list;      
+    }
 }
