@@ -36,7 +36,9 @@ class MeetingTime extends \yii\db\ActiveRecord
     {
         return [
             [['meeting_id', 'start', 'suggested_by'], 'required'],
-            [['meeting_id', 'start', 'suggested_by', 'status', 'created_at', 'updated_at'], 'integer']
+            [['meeting_id', 'start', 'suggested_by', 'status', 'created_at', 'updated_at'], 'integer'],
+            [['start'], 'unique', 'targetAttribute' => ['start','meeting_id'], 'message'=>Yii::t('frontend','This date and time has already been suggested.')],
+            
         ];
     }
     
@@ -69,6 +71,24 @@ class MeetingTime extends \yii\db\ActiveRecord
         ];
     }
 
+    public function afterSave($insert,$changedAttributes)
+    {
+        parent::afterSave($insert,$changedAttributes);
+        if ($insert) {
+          // if MeetingTime is added
+          // add MeetingTimeChoice for owner and participants
+          $mtc = new MeetingTimeChoice;
+          $mtc->addForNewMeetingTime($this->meeting_id,$this->suggested_by,$this->id);
+        } 
+    }
+    
+    public static function addChoices($meeting_id,$participant_id) {
+      $all_times = MeetingTime::find()->where(['meeting_id'=>$meeting_id])->all();
+      foreach ($all_times as $mt) {
+        MeetingTimeChoice::add($mt->id,$participant_id,0);
+      }
+    }
+    
     /**
      * @return \yii\db\ActiveQuery
      */

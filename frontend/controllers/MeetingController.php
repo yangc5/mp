@@ -42,7 +42,7 @@ class MeetingController extends Controller
             'query' => Meeting::find()->joinWith('participants')->where(['owner_id'=>Yii::$app->user->getId()])->orWhere(['participant_id'=>Yii::$app->user->getId()])->andWhere(['Meeting.status'=>[Meeting::STATUS_PLANNING,Meeting::STATUS_CONFIRMED]]),
         ]);
         $pastProvider = new ActiveDataProvider([
-            'query' => Meeting::find()->joinWith('participants')->where(['owner_id'=>Yii::$app->user->getId(),'Meeting.status'=>Meeting::STATUS_COMPLETED])->orWhere(['participant_id'=>Yii::$app->user->getId()]),
+            'query' => Meeting::find()->joinWith('participants')->where(['owner_id'=>Yii::$app->user->getId()])->orWhere(['participant_id'=>Yii::$app->user->getId()])->andWhere(['Meeting.status'=>Meeting::STATUS_COMPLETED]),
         ]);
         $canceledProvider = new ActiveDataProvider([
             'query' => Meeting::find()->joinWith('participants')->where(['owner_id'=>Yii::$app->user->getId()])->orWhere(['participant_id'=>Yii::$app->user->getId()])->andWhere(['Meeting.status'=>Meeting::STATUS_CANCELED]),

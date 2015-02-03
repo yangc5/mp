@@ -6,6 +6,7 @@ use Yii;
 use frontend\models\Meeting;
 use frontend\models\MeetingPlace;
 use frontend\models\MeetingPlaceSearch;
+use frontend\models\Place;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -67,16 +68,22 @@ class MeetingPlaceController extends Controller
          $model->meeting_id= $meeting_id;
          $model->suggested_by= Yii::$app->user->getId();
          $model->status = MeetingPlace::STATUS_SUGGESTED;
-         $posted_form = Yii::$app->request->post();
+         $posted_form = Yii::$app->request->post(); 
          if ($model->load($posted_form)) {
-           var_dump($model->place_id);
-           var_dump($posted_form['MeetingPlace']['google_place_id']);
-           die();
-           // convert either google place
-           // or place from user frequent list
-           // or current location
-           // or selected place id 
-           // into place_id for form validation
+          // check if both are chosen and return an error
+           if ($model->place_id<>'' and $posted_form['MeetingPlace']['google_place_id']<>'') {    
+             $model->addErrors(['place_id'=>Yii::t('frontend','Please choose one or the other')]);
+             return $this->render('create', [
+                  'model' => $model,
+                   'title' => $title,
+              ]);             
+           }
+           if ($posted_form['MeetingPlace']['google_place_id']<>'') {
+             // a google place is selected
+             // is google place already in the Place database?
+             // or, can we create a new place for this Google Place
+             $model->place_id = Place::googlePlaceSuggested($posted_form['MeetingPlace']);
+           }
            // validate the form against model rules
            if ($model->validate()) {
                // all inputs are valid

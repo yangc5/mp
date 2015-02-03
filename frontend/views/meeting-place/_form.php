@@ -17,7 +17,9 @@ MapAsset::register($this);
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <h3>Choose One of Your Places</h3>
+    <?= $form->errorSummary($model); ?>
+
+    <h3>Choose one of your places</h3>
     <div class="row">
       <div class="col-md-6">
     <?= Html::activeDropDownList($model, 'place_id',

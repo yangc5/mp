@@ -66,7 +66,18 @@ class Participant extends \yii\db\ActiveRecord
             
         ];
     }
-
+    
+    public function afterSave($insert,$changedAttributes)
+    {
+        parent::afterSave($insert,$changedAttributes);
+        if ($insert) {
+          // if Participant is added
+          // add MeetingPlaceChoice & MeetingTimeChoice this participant
+          MeetingTime::addChoices($this->meeting_id,$this->id);
+          MeetingPlace::addChoices($this->meeting_id,$this->id);
+        } 
+    }
+    
     /**
      * @inheritdoc
      */

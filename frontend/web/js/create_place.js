@@ -20,7 +20,7 @@ function setupListeners(model) {
         populateResult(place,model);
       }
     });
-    var place_input = document.getElementById('place-searchbox');
+    var place_input = document.getElementById(model+'-searchbox');
     google.maps.event.addDomListener(place_input, 'keydown', function(e) { 
         if (e.keyCode == 13) { 
             e.preventDefault();
@@ -42,7 +42,7 @@ function populateResult(place,model) {
 
 function loadMap(gps,name) {
   // to do - fix duplicates
-  if (!document.contains(mapcanvas)) {
+  if (document.querySelector('article').children.length==0) {
     var mapcanvas = document.createElement('div');
     mapcanvas.id = 'mapcanvas';
     mapcanvas.style.height = '300px';

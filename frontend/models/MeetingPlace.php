@@ -23,7 +23,7 @@ use yii\db\ActiveRecord;
 class MeetingPlace extends \yii\db\ActiveRecord
 {
     const STATUS_SUGGESTED =0;
-    const STATUS_SELECTED =0;
+    const STATUS_SELECTED =10;
     
     public $searchbox; // for google place search
     public $name;
@@ -47,8 +47,34 @@ class MeetingPlace extends \yii\db\ActiveRecord
     {
         return [
             [['meeting_id', 'place_id', 'suggested_by'], 'required'],
-            [['meeting_id', 'place_id', 'suggested_by', 'status', 'created_at', 'updated_at'], 'integer']
+            [['meeting_id', 'place_id', 'suggested_by', 'status', 'created_at', 'updated_at'], 'integer'],
+            [['place_id'], 'unique', 'targetAttribute' => ['place_id','meeting_id'], 'message'=>Yii::t('frontend','This place has already been suggested.')],
+            //[['google_place_id'], 'validate_chosen_place'], // ,'skipOnEmpty'=> false
         ];
+    }
+
+/*    function validate_chosen_place($attribute, $param) {      
+        if($this->$attribute<>'' && $this->place_id>0)
+            $this->addError($attribute, Yii::t('frontend','Please choose one or the other'));
+        }
+        */
+    
+    public function afterSave($insert,$changedAttributes)
+    {
+        parent::afterSave($insert,$changedAttributes);
+        if ($insert) {
+          // if MeetingPlace is added
+          // add MeetingPlaceChoice for owner and participants
+          $mpc = new MeetingPlaceChoice;
+          $mpc->addForNewMeetingPlace($this->meeting_id,$this->suggested_by,$this->id);
+        } 
+    }
+
+    public static function addChoices($meeting_id,$participant_id) {
+      $all_places = MeetingPlace::find()->where(['meeting_id'=>$meeting_id])->all();
+      foreach ($all_places as $mp) {
+        MeetingPlaceChoice::add($mp->id,$participant_id,0);
+      }
     }
 
     public function behaviors()
