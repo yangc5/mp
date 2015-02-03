@@ -77,7 +77,7 @@ class MeetingController extends Controller
       $participantProvider = new ActiveDataProvider([
           'query' => Participant::find()->where(['meeting_id'=>$id]),
       ]);
-//      $participantProvider = $participantSearchModel->find()->where(['meeting_id'=>$id])->all();
+
         return $this->render('view', [
             'model' => $this->findModel($id),
             'participantProvider' => $participantProvider,
@@ -164,7 +164,4 @@ class MeetingController extends Controller
         }
     }
     
-    public function actionSwitch($id,$val) {
-      return $id.' '.$val;
-    }
 }

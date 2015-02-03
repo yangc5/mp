@@ -53,30 +53,27 @@ use \kartik\switchinput\SwitchInput;
       'pluginOptions' => ['size' => 'mini','onText'=> Yii::t('frontend','yes'),'offText'=> Yii::t('frontend','no')],
   ]);
   ?>
-<?php
 
+  <?php
 $script = <<< JS
-  
-$('input[name="sites"]').on('switchChange.bootstrapSwitch', function(e, s) {
-//  console.log(e.target.value); // true | false
+
+$('input[name="time-chooser"]').on('switchChange.bootstrapSwitch', function(e, s) {
+  console.log(e.target.value); // true | false
+
 $.ajax({
-   url: '/mp/meeting/switch',
-   data: {id: '<id>', 'val': e.target.value},
+   url: '/mp/meetingtime/choose',   
+   data: {id: $model->id, 'val': e.target.value},
+   // e.target.value is selected MeetingTimeChoice model 
    success: function(data) {
-       // process data
-       alert(data);
+     return true;
    }
 });
-  
+
 });
 
-$('input[name="status_3"]').on('switchChange.bootstrapSwitch', function(e, s) {
-  console.log(s); // true | false
+// foreach meeting-place-choice for user and participant
 
-  
-});
 
-  
 JS;
 $position = \yii\web\View::POS_READY;
 $this->registerJs($script, $position);

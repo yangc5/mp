@@ -129,4 +129,12 @@ class MeetingPlace extends \yii\db\ActiveRecord
     {
         return $this->hasOne(User::className(), ['id' => 'suggested_by']);
     }
+    
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getMeetingPlaceChoices()
+    {
+        return $this->hasMany(MeetingPlaceChoice::className(), [ 'meeting_place_id'=>'id']);
+    }
 }

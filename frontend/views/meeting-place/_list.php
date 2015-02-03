@@ -12,7 +12,8 @@ use \kartik\switchinput\SwitchInput;
       echo SwitchInput::widget([
           'name' => 'status_3',
           'value' => 1,
-          'pluginOptions' => ['size' => 'mini','onText'=> Yii::t('frontend','yes'),'offText'=> Yii::t('frontend','no'),],
+          'pluginOptions' => ['size' => 'mini','onText'=> Yii::t('frontend','yes'),'offText'=> Yii::t('frontend','no'),'onColor' => 'success',
+                 'offColor' => 'danger',],
           
       ]);
       ?>
@@ -22,7 +23,8 @@ use \kartik\switchinput\SwitchInput;
     echo SwitchInput::widget([
         'name' => 'place-choice-'.$model->id,
       'value' => 1,        
-        'pluginOptions' => ['size' => 'mini','onText'=> Yii::t('frontend','yes'),'offText'=> Yii::t('frontend','no'),],
+        'pluginOptions' => ['size' => 'mini','onText'=> Yii::t('frontend','yes'),'offText'=> Yii::t('frontend','no'),'onColor' => 'success',
+               'offColor' => 'danger',],
     ]);
     ?>
   </td>
@@ -32,12 +34,11 @@ use \kartik\switchinput\SwitchInput;
           'name' => 'place-chooser',
           'type' => SwitchInput::RADIO,
           'items' => [
-              [ 'value' => $model->id, ],
+              [ 'value' => $model->id  ],
           ],
-          'pluginOptions' => ['size' => 'mini','handleWidth'=>60,'onText'=> Yii::t('frontend','Selected'),'offText'=> Yii::t('frontend','no'),],
+          'pluginOptions' => ['state'=> ($model->status==10?false:'selected'),'size' => 'mini','handleWidth'=>60,'onText'=> Yii::t('frontend','Selected'),'offText'=> Yii::t('frontend','no')],
           'labelOptions' => ['style' => 'font-size: 12px'],
-      ]);
-      
+      ]);      
       
       ?>
   </td>

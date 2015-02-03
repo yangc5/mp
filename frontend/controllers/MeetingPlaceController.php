@@ -136,6 +136,21 @@ class MeetingPlaceController extends Controller
         return $this->redirect(['index']);
     }
 
+    public function actionChoose($id,$val) {
+      // meeting_place_id needs to be set active
+      // other meeting_place_id for this meeting need to be set inactive
+      $meeting_id = $id;
+      $mtg = Meeting::find($meeting_id)->one();
+      foreach ($mtg->meetingPlaces as $mp) {
+        if ($mp->id == $val)
+          $mp->status = MeetingPlace::STATUS_SELECTED;
+        else
+          $mp->status = MeetingPlace::STATUS_SUGGESTED;
+        $mp->save();
+      }
+      return true;
+    }
+
     /**
      * Finds the MeetingPlace model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.

@@ -196,4 +196,16 @@ class Meeting extends \yii\db\ActiveRecord
      public function reschedule($meeting_id) {
        
      }
+     
+/*
+     // formatting helpers
+     public static function friendly_date($time_str) {
+       $tstamp = strtotime($time_str);
+       if (date('z',time()) <= date('z',$tstamp))
+         $date_str = Yii::app()->dateFormatter->format('h:mm a',CDateTimeParser::parse($tstamp, 'yyyy-MM-dd'),'medium',null);
+         else
+         $date_str = Yii::app()->dateFormatter->format('MMM d',CDateTimeParser::parse($tstamp, 'yyyy-MM-dd'),'medium',null);  
+       return $date_str;
+     }
+  */   
 }

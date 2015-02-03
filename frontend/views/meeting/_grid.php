@@ -15,6 +15,14 @@
                     return '<div>'.$model->getMeetingType($model->meeting_type).' '.Yii::t('frontend','Meeting').'</div>';
             },
     ],
+    [
+      'label'=>'Last updated',
+        'attribute' => 'updated_at',
+        'format' => 'raw',
+        'value' => function ($model) {                      
+                    return '<div>'.Yii::$app->formatter->asDatetime($model->updated_at,"MMM d").'</div>';
+            },
+    ],
 
         ['class' => 'yii\grid\ActionColumn','header'=>'Options'],
     ],

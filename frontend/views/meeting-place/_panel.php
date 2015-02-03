@@ -29,7 +29,7 @@ use yii\widgets\ListView;
            'dataProvider' => $placeProvider, 
            'itemOptions' => ['class' => 'item'], 
            'layout' => '{items}',
-           'itemView' => '_list', 
+           'itemView' => '_list',
        ]) ?>
   </table>
     
@@ -41,15 +41,14 @@ use yii\widgets\ListView;
 $script = <<< JS
   
 $('input[name="place-chooser"]').on('switchChange.bootstrapSwitch', function(e, s) {
-//  console.log(e.target.value); // true | false
+  console.log(e.target.value); // true | false
 
 $.ajax({
-   url: '/mp/meeting/switch',   
+   url: '/mp/meetingplace/choose',   
    data: {id: $model->id, 'val': e.target.value},
    // e.target.value is selected MeetingPlaceChoice model 
    success: function(data) {
-       // process data
-         alert(data);
+     return true;
    }
 });
   
