@@ -24,6 +24,14 @@ class MeetingPlace extends \yii\db\ActiveRecord
 {
     const STATUS_SUGGESTED =0;
     const STATUS_SELECTED =0;
+    
+    public $searchbox; // for google place search
+    public $name;
+    public $google_place_id;
+    public $location;
+    public $website;
+    public $vicinity;
+    public $full_address;
     /**
      * @inheritdoc
      */

@@ -37,4 +37,29 @@ use yii\widgets\ListView;
   <?php endif; ?>
 
 </div>
+<?php
+$script = <<< JS
+  
+$('input[name="place-chooser"]').on('switchChange.bootstrapSwitch', function(e, s) {
+//  console.log(e.target.value); // true | false
+
+$.ajax({
+   url: '/mp/meeting/switch',   
+   data: {id: $model->id, 'val': e.target.value},
+   // e.target.value is selected MeetingPlaceChoice model 
+   success: function(data) {
+       // process data
+         alert(data);
+   }
+});
+  
+});
+
+// foreach meeting-place-choice for user and participant
+
+  
+JS;
+$position = \yii\web\View::POS_READY;
+$this->registerJs($script, $position);
+?>
 

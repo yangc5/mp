@@ -5,10 +5,10 @@
 <p></p>
 <?= GridView::widget([
     'dataProvider' => $dataProvider,
-    'filterModel' => $searchModel,
+    //'filterModel' => $searchModel,
     'columns' => [
     [
-      'label'=>'Meeting',
+      'label'=>'Description',
         'attribute' => 'meeting_type',
         'format' => 'raw',
         'value' => function ($model) {                      
@@ -16,7 +16,7 @@
             },
     ],
 
-        ['class' => 'yii\grid\ActionColumn'],
+        ['class' => 'yii\grid\ActionColumn','header'=>'Options'],
     ],
 ]); ?>
 

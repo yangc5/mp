@@ -14,6 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <ul class="nav nav-tabs" role="tablist">
   <li class="active"><a href="#upcoming" role="tab" data-toggle="tab">Upcoming</a></li>
   <li><a href="#past" role="tab" data-toggle="tab">Past</a></li>
+  <li><a href="#canceled" role="tab" data-toggle="tab">Canceled</a></li>
 </ul>
 
 <!-- Tab panes -->
@@ -22,8 +23,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="meeting-index">
       
       <?= $this->render('_grid', [
-          'dataProvider' => $dataProvider,
-          'searchModel' => $searchModel,
+          'dataProvider' => $upcomingProvider,
+          //'searchModel' => $searchModel,
       ]) ?>
 
       </div> <!-- end of upcoming meetings tab -->
@@ -31,9 +32,16 @@ $this->params['breadcrumbs'][] = $this->title;
   <div class="tab-pane" id="past">
 
     <?= $this->render('_grid', [
-        'dataProvider' => $dataProvider,
-        'searchModel' => $searchModel,
+        'dataProvider' => $pastProvider,
+        //'searchModel' => $searchModel,
+    ]) ?>    
+  </div> <!-- end of past meetings tab -->
+  <div class="tab-pane" id="canceled">
+    <?= $this->render('_grid', [
+        'dataProvider' => $canceledProvider,
+        //'searchModel' => $searchModel,
     ]) ?>
     
-  </div> <!-- end of past meetings tab -->
+  </div> <!-- end of canceled meetings tab -->
+  
 </div>

@@ -31,7 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
         var input = document.getElementById('place-searchbox');
         var options = $options;        
         searchbox = new google.maps.places.Autocomplete(input, options);
-        setupListeners();
+        setupListeners('place');
 })();" , \yii\web\View::POS_END );
 // 'setupBounds('.$bound_bl.','.$bound_tr.');
 ?>

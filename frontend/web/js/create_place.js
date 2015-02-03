@@ -7,7 +7,7 @@ function setupBounds(pt1, pt2, pt3, pt4) {
     searchbox.setBounds(defaultBounds);
 }
 
-function setupListeners() { 
+function setupListeners(model) { 
 //  google.maps.event.addDomListener(window, 'load', initialize);
     // searchbox is the var for the google places object created on the page
     google.maps.event.addListener(searchbox, 'place_changed', function() {
@@ -17,7 +17,7 @@ function setupListeners() {
         return;
       }  else {      
         // migrates JSON data from Google to hidden form fields
-        populateResult(place);
+        populateResult(place,model);
       }
     });
     var place_input = document.getElementById('place-searchbox');
@@ -28,27 +28,28 @@ function setupListeners() {
       });
 }
 
-function populateResult(place) {
+function populateResult(place,model) {
   // moves JSON data retrieve from Google to hidden form fields
   // so Yii2 can post the data
-  $('#place-location').val(JSON.stringify(place['geometry']['location']));
-  $('#place-google_place_id').val(place['place_id']);
-  $('#place-full_address').val(place['formatted_address']);
-  $('#place-website').val(place['website']);
-  $('#place-vicinity').val(place['vicinity']);
-  $('#place-name').val(place['name']);
-  loadMap(place['geometry']['location'],place['name']);
+    $('#'+model+'-location').val(JSON.stringify(place['geometry']['location']));
+    $('#'+model+'-google_place_id').val(place['place_id']);
+    $('#'+model+'-full_address').val(place['formatted_address']);
+    $('#'+model+'-website').val(place['website']);
+    $('#'+model+'-vicinity').val(place['vicinity']);
+    $('#'+model+'-name').val(place['name']);
+    loadMap(place['geometry']['location'],place['name']);    
 }
 
 function loadMap(gps,name) {
-  var mapcanvas = document.createElement('div');
-  mapcanvas.id = 'mapcanvas';
-  mapcanvas.style.height = '300px';
-  mapcanvas.style.width = '300px';
-  mapcanvas.style.border = '1px solid black';
-    
-  document.querySelector('article').appendChild(mapcanvas);  
-  
+  // to do - fix duplicates
+  if (!document.contains(mapcanvas)) {
+    var mapcanvas = document.createElement('div');
+    mapcanvas.id = 'mapcanvas';
+    mapcanvas.style.height = '300px';
+    mapcanvas.style.width = '300px';
+    mapcanvas.style.border = '1px solid black';    
+    document.querySelector('article').appendChild(mapcanvas);  
+  }
   var latlng = new google.maps.LatLng(gps['k'], gps['D']);
   var myOptions = {
     zoom: 16,

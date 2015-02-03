@@ -67,7 +67,11 @@ class MeetingPlaceController extends Controller
          $model->meeting_id= $meeting_id;
          $model->suggested_by= Yii::$app->user->getId();
          $model->status = MeetingPlace::STATUS_SUGGESTED;
-         if ($model->load(Yii::$app->request->post())) {
+         $posted_form = Yii::$app->request->post();
+         if ($model->load($posted_form)) {
+           var_dump($model->place_id);
+           var_dump($posted_form['MeetingPlace']['google_place_id']);
+           die();
            // convert either google place
            // or place from user frequent list
            // or current location

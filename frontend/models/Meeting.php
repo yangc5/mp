@@ -171,4 +171,29 @@ class Meeting extends \yii\db\ActiveRecord
         $title.=' Meeting';
         return $title;
      }
+     
+     public function canInvite($meeting_id) {
+       // check if an invite can be sent
+       // is there a participant
+       // is there at least one place
+       // is there at least one time
+       return false;
+     }
+     
+     public function canFinalize($meeting_id) {
+       // organizer can always finalize
+       // check if meeting can be finalized by participant
+       // is there a participant
+       // has participant responded to one time or is there only one time
+       // has participant responded to one place or is there only one place
+       return false;
+     }
+     
+     public function cancel($meeting_id) {
+       
+     }
+
+     public function reschedule($meeting_id) {
+       
+     }
 }

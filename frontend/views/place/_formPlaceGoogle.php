@@ -17,6 +17,8 @@ MapAsset::register($this);
   <p>Type in a place or business known to Google Places:</p>
 
     <?php $form = ActiveForm::begin(); ?>
+    <?php echo $form->errorSummary($model);?> 
+    
     <?= $form->field($model, 'searchbox')->textInput(['maxlength' => 255])->label('Place') ?>
     
     <?= BaseHtml::activeHiddenInput($model, 'name'); ?>

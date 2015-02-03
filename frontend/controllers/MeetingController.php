@@ -37,12 +37,21 @@ class MeetingController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new MeetingSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        
+      // add filter for upcoming or past
+        $upcomingProvider = new ActiveDataProvider([
+            'query' => Meeting::find()->joinWith('participants')->where(['owner_id'=>Yii::$app->user->getId()])->orWhere(['participant_id'=>Yii::$app->user->getId()])->andWhere(['Meeting.status'=>[Meeting::STATUS_PLANNING,Meeting::STATUS_CONFIRMED]]),
+        ]);
+        $pastProvider = new ActiveDataProvider([
+            'query' => Meeting::find()->joinWith('participants')->where(['owner_id'=>Yii::$app->user->getId(),'Meeting.status'=>Meeting::STATUS_COMPLETED])->orWhere(['participant_id'=>Yii::$app->user->getId()]),
+        ]);
+        $canceledProvider = new ActiveDataProvider([
+            'query' => Meeting::find()->joinWith('participants')->where(['owner_id'=>Yii::$app->user->getId()])->orWhere(['participant_id'=>Yii::$app->user->getId()])->andWhere(['Meeting.status'=>Meeting::STATUS_CANCELED]),
+        ]);
+
         return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+            'upcomingProvider' => $upcomingProvider,
+            'pastProvider' => $pastProvider,
+            'canceledProvider' => $canceledProvider,
         ]);
     }
 

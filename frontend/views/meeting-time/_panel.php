@@ -72,6 +72,7 @@ $.ajax({
 
 $('input[name="status_3"]').on('switchChange.bootstrapSwitch', function(e, s) {
   console.log(s); // true | false
+
   
 });
 

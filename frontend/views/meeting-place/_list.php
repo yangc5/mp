@@ -20,10 +20,8 @@ use \kartik\switchinput\SwitchInput;
   <td style>
     <?
     echo SwitchInput::widget([
-        'name' => 'status_3',
-      'value' => 1,
-        
-        'disabled' => true,
+        'name' => 'place-choice-'.$model->id,
+      'value' => 1,        
         'pluginOptions' => ['size' => 'mini','onText'=> Yii::t('frontend','yes'),'offText'=> Yii::t('frontend','no'),],
     ]);
     ?>
@@ -31,10 +29,10 @@ use \kartik\switchinput\SwitchInput;
   <td style>
       <?
       echo SwitchInput::widget([
-          'name' => 'chooser',
+          'name' => 'place-chooser',
           'type' => SwitchInput::RADIO,
           'items' => [
-              [ 'value' => 3, ],
+              [ 'value' => $model->id, ],
           ],
           'pluginOptions' => ['size' => 'mini','handleWidth'=>60,'onText'=> Yii::t('frontend','Selected'),'offText'=> Yii::t('frontend','no'),],
           'labelOptions' => ['style' => 'font-size: 12px'],

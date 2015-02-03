@@ -24,3 +24,20 @@ $this->params['breadcrumbs'][] = $this->title;
     ]) ?>
 
 </div>
+<?
+
+  $gpJsLink= 'http://maps.googleapis.com/maps/api/js?' . http_build_query(array(
+                          'libraries' => 'places',
+                          'sensor' => 'false',
+                  ));
+  echo $this->registerJsFile($gpJsLink);
+
+  $options = '{"types":["establishment"],"componentRestrictions":{"country":"us"}}';
+  echo $this->registerJs("(function(){
+        var input = document.getElementById('meetingplace-searchbox');
+        var options = $options;        
+        searchbox = new google.maps.places.Autocomplete(input, options);
+        setupListeners('meetingplace');
+})();" , \yii\web\View::POS_END );
+// 'setupBounds('.$bound_bl.','.$bound_tr.');
+?>

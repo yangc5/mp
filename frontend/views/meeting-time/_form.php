@@ -11,6 +11,8 @@ use dosamigos\datetimepicker\DateTimePicker;
 
 <div class="meeting-time-form">
 
+  <div class="row">
+    <div class="col-md-4">
     <?php $form = ActiveForm::begin(); ?>
 
     <?= DateTimePicker::widget([
@@ -26,13 +28,19 @@ use dosamigos\datetimepicker\DateTimePicker;
             'pickerPosition' => 'bottom-left',
             // to do - format one day ahead
             //'startDate'=> "2013-02-14 10:00",
+            //'initialDate'=> time(),            
         ]
     ]);?>   
-    
+    </div>
+  </div>  
+  <div class="clearfix"><p></div>
+  <div class="row">
+      <div class="col-md-4">
      <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? Yii::t('frontend', 'Add') : Yii::t('frontend', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
-
+    </div>
+  </div>
     <?php ActiveForm::end(); ?>
 
 </div>
