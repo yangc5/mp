@@ -41,7 +41,6 @@ function populateResult(place,model) {
 }
 
 function loadMap(gps,name) {
-  // to do - fix duplicates
   if (document.querySelector('article').children.length==0) {
     var mapcanvas = document.createElement('div');
     mapcanvas.id = 'mapcanvas';

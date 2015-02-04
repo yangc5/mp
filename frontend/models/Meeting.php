@@ -4,6 +4,7 @@ namespace frontend\models;
 
 use Yii;
 use yii\db\ActiveRecord;
+use yii\i18n\Formatter;
 
 /**
  * This is the model class for table "meeting".
@@ -42,7 +43,14 @@ class Meeting extends \yii\db\ActiveRecord
   const STATUS_COMPLETED = 40;
   const STATUS_CANCELED = 60;
   
+  const VIEWER_ORGANIZER = 0;
+  const VIEWER_PARTICIPANT = 10;
+  
   public $title;
+  public $viewer;
+  public $isReadyToSend = false;
+  public $isReadyToFinalize = false;
+  
     /**
      * @inheritdoc
      */
@@ -165,6 +173,15 @@ class Meeting extends \yii\db\ActiveRecord
          );
      }		
      
+     public function getMeetingHeader() {
+       $str = $this->getMeetingType($this->meeting_type);
+       if (count($this->participants)>0) {
+         $str.=Yii::t('frontend',' with ');
+         $str.=$this->participants[0]->participant->email;
+       }
+       return $str;
+     }
+     
      public function getMeetingTitle($meeting_id) {
         $meeting = Meeting::find()->where(['id' => $meeting_id])->one();
         $title = $this->getMeetingType($meeting->meeting_type);
@@ -172,40 +189,81 @@ class Meeting extends \yii\db\ActiveRecord
         return $title;
      }
      
-     public function canInvite($meeting_id) {
-       // check if an invite can be sent
-       // is there a participant
-       // is there at least one place
-       // is there at least one time
-       return false;
-     }
-     
-     public function canFinalize($meeting_id) {
-       // organizer can always finalize
-       // check if meeting can be finalized by participant
-       // is there a participant
-       // has participant responded to one time or is there only one time
-       // has participant responded to one place or is there only one place
-       return false;
-     }
-     
-     public function cancel($meeting_id) {
-       
-     }
-
      public function reschedule($meeting_id) {
        
      }
-     
-/*
-     // formatting helpers
-     public static function friendly_date($time_str) {
-       $tstamp = strtotime($time_str);
-       if (date('z',time()) <= date('z',$tstamp))
-         $date_str = Yii::app()->dateFormatter->format('h:mm a',CDateTimeParser::parse($tstamp, 'yyyy-MM-dd'),'medium',null);
-         else
-         $date_str = Yii::app()->dateFormatter->format('MMM d',CDateTimeParser::parse($tstamp, 'yyyy-MM-dd'),'medium',null);  
-       return $date_str;
+
+     public function setViewer() {
+       if ($this->owner_id == Yii::$app->user->getId()) {
+         $this->viewer = Meeting::VIEWER_ORGANIZER;
+       } else {
+         $this->viewer = Meeting::VIEWER_PARTICIPANT;
+       }
      }
-  */   
+     
+     public function canSend() {
+       // check if an invite can be sent
+       // req: a participant, at least one place, at least one time
+       if (count($this->participants)>0
+        && count($this->meetingPlaces)>0
+        && count($this->meetingTimes)>0
+        ) {
+         $this->isReadyToSend = true;
+       } else {
+         $this->isReadyToSend = false;
+       }
+       return $this->isReadyToSend;
+      }
+
+      public function canFinalize() {
+        // check if meeting can be finalized by viewer
+        if ($this->canSend()) {
+          // organizer can always finalize
+          if ($this->viewer == Meeting::VIEWER_ORGANIZER) {
+            $this->isReadyToFinalize = true;
+          } else {
+            // viewer is a participant
+            // has participant responded to one time or is there only one time
+            // has participant responded to one place or is there only one place
+            
+          }          
+        }          
+        
+        return $this->isReadyToFinalize;
+      }     
+      
+      public function cancel() {
+        $this->status = self::STATUS_CANCELED;
+        $this->save();
+      }
+          
+      public function prepareView() {
+        $this->setViewer();
+        $this->canSend();
+        $this->canFinalize();
+        // has invitation been sent
+         if ($this->canSend()) {
+           Yii::$app->session->setFlash('warning', Yii::t('frontend','This invitation has not yet been sent.'));
+      }
+        // to do - if sent, has invitation been opened
+        // to do - if not finalized, is it within 72 hrs, 48 hrs        
+      }
+      
+      public static function friendlyDateFromTimeString($time_str) {
+        $tstamp = strtotime($time_str);
+        return $this->friendlyDateFromTimeString($tstamp);
+      }
+
+       // formatting helpers
+       public static function friendlyDateFromTimestamp($tstamp) {
+         $margin=$tstamp-time();
+         // less than a day ahead
+         if ($margin>(24*3600)) {
+           $date_str = Yii::$app->formatter->asDateTime($tstamp,'h:mm a');
+         }   else {
+           $date_str = Yii::$app->formatter->asDateTime($tstamp,'E MMM d,\' '.Yii::t('frontend','at').'\' h:mm a');         
+         }
+         return $date_str;
+       }
+      
 }

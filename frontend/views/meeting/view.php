@@ -7,7 +7,7 @@ use yii\widgets\ListView;
 /* @var $this yii\web\View */
 /* @var $model frontend\models\Meeting */
 
-$this->title = $model->getMeetingType($model->meeting_type) .' '.Yii::t('frontend', 'Meeting');
+$this->title = $model->getMeetingHeader();
 $this->params['breadcrumbs'][] = ['label' => Yii::t('frontend', 'Meetings'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
@@ -29,10 +29,10 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="col-lg-6"></div>
         <div class="col-lg-6" >
           <div style="float:right;">
-          <?= Html::a(Yii::t('frontend', 'Send'), ['finalize', 'id' => $model->id], ['class' => 'btn btn-primary disabled']) ?>
+          <?= Html::a(Yii::t('frontend', 'Send'), ['finalize', 'id' => $model->id], ['class' => 'btn btn-primary '.(!$model->isReadyToSend?'disabled':'')]) ?>
 
-          <?= Html::a(Yii::t('frontend', 'Finalize'), ['finalize', 'id' => $model->id], ['class' => 'btn btn-primary disabled']) ?>
-          <?= Html::a('', ['finalize', 'id' => $model->id], ['class' => 'btn btn-primary glyphicon glyphicon-remove','title'=>'Cancel']) ?>
+          <?= Html::a(Yii::t('frontend', 'Finalize'), ['finalize', 'id' => $model->id], ['class' => 'btn btn-success '.(!$model->isReadyToFinalize?'disabled':'')]) ?>
+          <?= Html::a('', ['cancel', 'id' => $model->id], ['class' => 'btn btn-primary glyphicon glyphicon-remove btn-danger','title'=>Yii::t('frontend','Cancel')]) ?>
 
           <?= Html::a('', ['update', 'id' => $model->id], ['class' => 'btn btn-primary glyphicon glyphicon-pencil','title'=>'Edit']) ?>
           </div>

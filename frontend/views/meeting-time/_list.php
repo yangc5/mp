@@ -1,11 +1,12 @@
 <?php
 use yii\helpers\Html;
+use frontend\models\Meeting;
 use \kartik\switchinput\SwitchInput;
 ?>
 
 <tr > 
   <td style >
-        <?= Yii::$app->formatter->asDatetime($model->start) ?>
+        <?= Meeting::friendlyDateFromTimestamp($model->start) ?>
   </td>
   <td style>
       <?

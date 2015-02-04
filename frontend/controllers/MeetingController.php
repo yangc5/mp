@@ -77,9 +77,10 @@ class MeetingController extends Controller
       $participantProvider = new ActiveDataProvider([
           'query' => Participant::find()->where(['meeting_id'=>$id]),
       ]);
-
+      $model = $this->findModel($id);
+      $model->prepareView();
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $model,
             'participantProvider' => $participantProvider,
             'timeProvider' => $timeProvider,
             'noteProvider' => $noteProvider,
@@ -146,6 +147,11 @@ class MeetingController extends Controller
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
+    }
+    
+    public function actionCancel($id) {
+      $this->findModel($id)->cancel();
+      return $this->redirect(['index']);
     }
 
     /**

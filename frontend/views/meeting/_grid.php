@@ -12,7 +12,7 @@
         'attribute' => 'meeting_type',
         'format' => 'raw',
         'value' => function ($model) {                      
-                    return '<div>'.$model->getMeetingType($model->meeting_type).' '.Yii::t('frontend','Meeting').'</div>';
+                    return '<div>'.$model->getMeetingHeader().'</div>';
             },
     ],
     [

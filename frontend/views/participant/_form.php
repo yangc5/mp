@@ -24,6 +24,7 @@ use yii\widgets\ActiveForm;
            ],
           ]);        
     ?>
+    
     <p></p>
     <!-- todo - offer drop down of friends -->
 

@@ -1,12 +1,13 @@
 <?php
 use yii\helpers\Html;
+use yii\helpers\BaseUrl;
 use \kartik\switchinput\SwitchInput;
 
 ?>
 
 <tr > 
   <td style >
-        <?= $model->place->name ?>
+        <?= Html::a($model->place->name,BaseUrl::home().'/place/'.$model->place->slug) ?>
   </td>
   <td style>
       <?
