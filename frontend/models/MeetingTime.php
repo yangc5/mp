@@ -85,10 +85,10 @@ class MeetingTime extends \yii\db\ActiveRecord
         } 
     }
     
-    public static function addChoices($meeting_id,$participant_id) {
+    public function addChoices($meeting_id,$participant_id) {
       $all_times = MeetingTime::find()->where(['meeting_id'=>$meeting_id])->all();
       foreach ($all_times as $mt) {
-        MeetingTimeChoice::add($mt->id,$participant_id,0);
+        MeetingTimeChoice::add($mt->id,$participant_id,0);        
       }
     }
     
@@ -114,4 +114,13 @@ class MeetingTime extends \yii\db\ActiveRecord
       
         //return asDatetime($this->start);
     }
+    
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getMeetingTimeChoices()
+    {
+        return $this->hasMany(MeetingTimeChoice::className(), [ 'meeting_time_id'=>'id']);
+    }
+    
 }

@@ -129,18 +129,18 @@ class MeetingTimeController extends Controller
 
         return $this->redirect(['index']);
     }
-
+    
     public function actionChoose($id,$val) {
       // meeting_time_id needs to be set active
       // other meeting_time_id for this meeting need to be set inactive
-      $meeting_id = $id;
-      $mtg = Meeting::find($meeting_id)->one();
-      foreach ($mtg->meetingTimes as $mp) {
-        if ($mp->id == $val)
-          $mp->status = MeetingTime::STATUS_SELECTED;
+      $meeting_id = intval($id);
+      $mtg=Meeting::find()->where(['id'=>$meeting_id])->one();
+      foreach ($mtg->meetingTimes as $mt) {
+        if ($mt->id == intval($val))
+          $mt->status = MeetingTime::STATUS_SELECTED;
         else
-          $mp->status = MeetingTime::STATUS_SUGGESTED;
-        $mp->save();
+          $mt->status = MeetingTime::STATUS_SUGGESTED;
+        $mt->save();
       }
       return true;
     }

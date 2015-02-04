@@ -45,17 +45,17 @@ $this->params['breadcrumbs'][] = $this->title;
             'model'=>$model,
             'participantProvider' => $participantProvider,
         ]) ?>
-        
+
         <?= $this->render('../meeting-place/_panel', [
             'model'=>$model,
             'placeProvider' => $placeProvider,
-        ]) ?>
-                       
+        ]) ?>       
+                
         <?= $this->render('../meeting-time/_panel', [
             'model'=>$model,
             'timeProvider' => $timeProvider,
         ]) ?>
-        
+
         <?= $this->render('../meeting-note/_panel', [
             'model'=>$model,
             'noteProvider' => $noteProvider,

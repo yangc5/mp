@@ -73,8 +73,10 @@ class Participant extends \yii\db\ActiveRecord
         if ($insert) {
           // if Participant is added
           // add MeetingPlaceChoice & MeetingTimeChoice this participant
-          MeetingTime::addChoices($this->meeting_id,$this->id);
-          MeetingPlace::addChoices($this->meeting_id,$this->id);
+          $mt = new MeetingTime;          
+          $mt->addChoices($this->meeting_id,$this->participant_id);
+          $mp = new MeetingPlace;          
+          $mp->addChoices($this->meeting_id,$this->participant_id);
         } 
     }
     
