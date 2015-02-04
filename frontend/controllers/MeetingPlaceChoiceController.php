@@ -30,8 +30,8 @@ class MeetingPlaceChoiceController extends \yii\web\Controller
     {
       // caution - incoming AJAX type issues with val
       $id=str_replace('mpc-','',$id);      
-      $mpc = $this->findModel($id);
-      
+      $mpc = $this->findModel($id);      
+      if (Yii::$app->user->getId()!=$mpc->user_id) return false;        
       if (intval($state) == 0 or $state=='false')
         $mpc->status = MeetingPlaceChoice::STATUS_NO;
       else

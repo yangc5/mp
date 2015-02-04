@@ -135,6 +135,8 @@ class MeetingTimeController extends Controller
       // other meeting_time_id for this meeting need to be set inactive
       $meeting_id = intval($id);
       $mtg=Meeting::find()->where(['id'=>$meeting_id])->one();
+      if (Yii::$app->user->getId()!=$mtg->owner_id) return false;
+      // to do - also check participant id if participants allowed to choose      
       foreach ($mtg->meetingTimes as $mt) {
         if ($mt->id == intval($val))
           $mt->status = MeetingTime::STATUS_SELECTED;

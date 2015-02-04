@@ -29,6 +29,7 @@ class MeetingTimeChoiceController extends \yii\web\Controller
         $id=str_replace('mtc-','',$id);
         // caution - incoming AJAX type issues with val
         $mtc = $this->findModel($id);
+        if (Yii::$app->user->getId()!=$mtc->user_id) return false;        
         if (intval($state) == 0 or $state=='false')
           $mtc->status = MeetingTimeChoice::STATUS_NO;
         else
