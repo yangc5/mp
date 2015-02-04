@@ -1,6 +1,7 @@
 <?php
 use yii\helpers\Html;
 use \kartik\switchinput\SwitchInput;
+
 ?>
 
 <tr > 
@@ -12,7 +13,7 @@ use \kartik\switchinput\SwitchInput;
       echo SwitchInput::widget([
           'name' => 'status_3',
           'value' => 1,
-          'pluginOptions' => ['size' => 'mini','onText'=> Yii::t('frontend','yes'),'offText'=> Yii::t('frontend','no'),'onColor' => 'success',
+          'pluginOptions' => ['size' => 'mini','onText' => '<i class="glyphicon glyphicon-ok"></i>','offText'=>'<i class="glyphicon glyphicon-remove"></i>','onColor' => 'success',
                  'offColor' => 'danger',],
           
       ]);
@@ -23,23 +24,29 @@ use \kartik\switchinput\SwitchInput;
     echo SwitchInput::widget([
         'name' => 'place-choice-'.$model->id,
       'value' => 1,        
-        'pluginOptions' => ['size' => 'mini','onText'=> Yii::t('frontend','yes'),'offText'=> Yii::t('frontend','no'),'onColor' => 'success',
+        'pluginOptions' => ['size' => 'mini','onText' => '<i class="glyphicon glyphicon-ok"></i>','offText'=>'<i class="glyphicon glyphicon-remove"></i>','onColor' => 'success',
                'offColor' => 'danger',],
     ]);
     ?>
   </td>
   <td style>
+      
       <?
+      if ($model->status == $model::STATUS_SELECTED) {
+          $value = $model->id;
+      }    else {
+        $value = 0;        
+      } 
       echo SwitchInput::widget([
           'name' => 'place-chooser',
           'type' => SwitchInput::RADIO,
           'items' => [
-              [ 'value' => $model->id  ],
+              [ 'value' => $model->id],
           ],
-          'pluginOptions' => ['state'=> ($model->status==10?false:'selected'),'size' => 'mini','handleWidth'=>60,'onText'=> Yii::t('frontend','Selected'),'offText'=> Yii::t('frontend','no')],
+          'value' => $value,
+          'pluginOptions' => [  'size' => 'mini','handleWidth'=>60,'onText' => '<i class="glyphicon glyphicon-ok"></i>','offText'=>'<i class="glyphicon glyphicon-remove"></i>'],
           'labelOptions' => ['style' => 'font-size: 12px'],
       ]);      
-      
       ?>
   </td>
 
