@@ -24,7 +24,6 @@ $this->params['breadcrumbs'][] = $this->title;
       
       <?= $this->render('_grid', [
           'dataProvider' => $upcomingProvider,
-          //'searchModel' => $searchModel,
       ]) ?>
 
       </div> <!-- end of upcoming meetings tab -->
@@ -33,13 +32,11 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= $this->render('_grid', [
         'dataProvider' => $pastProvider,
-        //'searchModel' => $searchModel,
     ]) ?>    
   </div> <!-- end of past meetings tab -->
   <div class="tab-pane" id="canceled">
     <?= $this->render('_grid', [
         'dataProvider' => $canceledProvider,
-        //'searchModel' => $searchModel,
     ]) ?>
     
   </div> <!-- end of canceled meetings tab -->
