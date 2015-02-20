@@ -42,6 +42,9 @@ use kartik\file\FileInput;
              $test = $form->field($model, 'image')->widget(FileInput::classname(), [
                  'options' => ['accept' => 'image/*'],
                   'pluginOptions'=>['allowedFileExtensions'=>['jpg','gif','png']],
+             ]);
+             echo $form->field($model, 'image')->widget(FileInput::classname(), [
+                 'options' => ['accept' => 'image/*'],
              ]);   
            } catch (Exception $e) {
                echo 'Caught exception: ',  $e->getMessage(), "\n";
