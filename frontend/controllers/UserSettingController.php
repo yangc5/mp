@@ -45,6 +45,14 @@ class UserSettingController extends Controller
       // returns record id not user_id
       $id = UserSetting::initialize(Yii::$app->user->getId());
       echo $id;
+      $model = new UserSetting;
+      $model = $this->findModel($id);        
+      if ($model->load(Yii::$app->request->post())) {
+        echo ' nope';
+      }
+      return $this->render('test', [
+          'model' => $model,
+      ]);
       
     }
 
