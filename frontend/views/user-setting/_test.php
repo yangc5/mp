@@ -37,7 +37,17 @@ use kartik\file\FileInput;
                   <?= $form->field($model, 'no_email')->checkbox(['label' =>Yii::t('frontend','Turn off all email'),'uncheck' =>  $model::SETTING_NO, 'checked' => $model::SETTING_YES]); ?>
                 </div>
            <div class="tab-pane vertical-pad" id="photo">
-
+             <?php
+           try {
+             $test = $form->field($model, 'image')->widget(FileInput::classname(), [
+                 'options' => ['accept' => 'image/*'],
+                  'pluginOptions'=>['allowedFileExtensions'=>['jpg','gif','png']],
+             ]);   
+           } catch (Exception $e) {
+               echo 'Caught exception: ',  $e->getMessage(), "\n";
+           }
+             
+             ?>
            </div> <!-- end of upload photo tab -->
            <div class="form-group">
                <?= Html::submitButton(Yii::t('frontend', 'Save Settings'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
