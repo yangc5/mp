@@ -7,7 +7,11 @@ $this->title = 'Meeting Planner';
     <div class="jumbotron">
         <h1><?= Yii::t('frontend','Coming Soon') ?></h1>
 
-        <p class="lead"><?= Yii::t('frontend','A new app to make scheduling as simple as it should be.') ?></p>
+        <p class="lead"><?= Yii::t('frontend','A new app to make scheduling as simple as it should be.') ?> </p>        
+        <p class="lead">
+          <?= Yii::t('frontend','Built step by step in a ') ?>
+          <strong><a href="https://code.tutsplus.com/tutorials/building-your-startup-with-php-table-of-contents--cms-23316"><?= Yii::t('frontend','Tuts+ Tutorial Series') ?></a></strong>
+          </p>
 
         <p><a class="btn btn-lg btn-success" href="./site/about"><?= Yii::t('frontend','Learn More') ?></a></p>
     </div>
@@ -35,7 +39,7 @@ $this->title = 'Meeting Planner';
 
                 <p><?= Yii::t('frontend','In Episode 3, we build code to enable meeting places, integrating with HTML 5 Geolocation, Google Maps and Google Places.') ?> </p>
 
-                <p><a class="btn btn-default" href="http://code.tutsplus.com/tutorials/building-your-startup-with-php-geolocation-and-google-places--cms-22729"><?= Yii::t('frontend','Episode 3') ?> &raquo;</a></p>
+                <p><a class="btn btn-default" href="https://code.tutsplus.com/tutorials/building-your-startup-with-php-geolocation-and-google-places--cms-22729"><?= Yii::t('frontend','Episode 3') ?> &raquo;</a></p>
             </div>
         </div>
 
@@ -52,22 +56,48 @@ $this->title = 'Meeting Planner';
                 <p><a class="btn btn-default" href="http://code.tutsplus.com/tutorials/building-your-startup-with-php-localization-with-i18n--cms-23102"><?= Yii::t('frontend','Episode 4 (coming soon)' ) ?> &raquo;</a></p>
             </div>
             <div class="col-lg-4">
-                <h2><?= Yii::t('frontend','Access Controls &amp; Polish') ?> </h2>
+                <h2><?= Yii::t('frontend','Access Controls, Ownership &amp; Polish') ?> </h2>
 
                 <p><?= Yii::t('frontend','We circle back to polish some of what we\'ve built to date leveraging more of the Yii Framework.') ?> </p>
 
-                <p><a class="btn btn-default" href="#"><?= Yii::t('frontend','Episode 5 (coming soon)') ?> &raquo;</a></p>
+                <p><a class="btn btn-default" href="http://code.tutsplus.com/tutorials/building-your-startup-access-control-active-record-relations-and-slugs--cms-23109"><?= Yii::t('frontend','Episode 5 (coming soon)') ?> &raquo;</a></p>
             </div>
             <div class="col-lg-4">
-                <h2><?= Yii::t('frontend','TBD') ?></h2>
+                <h2><?= Yii::t('frontend','User Settings, Profile Images &amp; Contact Details') ?></h2>
 
-                <p><?= Yii::t('frontend','To be decided.') ?> </p>
+                <p><?= Yii::t('frontend','Building support for infrastructure to support users.') ?> </p>
 
-                <p><a class="btn btn-default" href="#"><?= Yii::t('frontend','Episode 6 (tbd)') ?> &raquo;</a></p>
+                <p><a class="btn btn-default" href="http://code.tutsplus.com/tutorials/building-your-startup-with-php-user-settings-profile-images-and-contact-details--cms-23196"><?= Yii::t('frontend','Episode 6 (coming soon)') ?> &raquo;</a></p>
             </div>
         </div>
 
     </div>
 	<!--- end row two --->
+		<!--- begin row three --->
+        <div class="row">
+            <div class="col-lg-4">
+                <h2><?= Yii::t('frontend','Scheduling Meetings') ?></h2>
 
+                <p><?= Yii::t('frontend','Beginning to build the schedule meeting functionality.') ?></p>
+
+                <p><a class="btn btn-default" href="http://code.tutsplus.com/tutorials/building-your-startup-with-php-scheduling-a-meeting--cms-23252"><?= Yii::t('frontend','Episode 7 (coming soon)' ) ?> &raquo;</a></p>
+            </div>
+            <div class="col-lg-4">
+                <h2><?= Yii::t('frontend','Scheduling Availability &amp; Choices') ?> </h2>
+
+                <p><?= Yii::t('frontend','Building AJAX to simplify meeting availability and selections.') ?> </p>
+
+                <p><a class="btn btn-default" href="http://code.tutsplus.com/tutorials/building-your-startup-with-php-scheduling-availability-and-choices--cms-23268"><?= Yii::t('frontend','Episode 8 (coming soon)') ?> &raquo;</a></p>
+            </div>
+            <div class="col-lg-4">
+                <h2><?= Yii::t('frontend','Delivering the Meeting Announcement') ?></h2>
+
+                <p><?= Yii::t('frontend','Building the support required to send a meeting request and handle responses from the participant.') ?> </p>
+
+                <p><a class="btn btn-default" href="http://code.tutsplus.com/tutorials/building-your-startup-delivering-the-meeting-announcement--cms-23428"><?= Yii::t('frontend','Episode 9 (coming soon)') ?> &raquo;</a></p>
+            </div>
+        </div>
+
+    </div>
+	<!--- end row three --->	
 </div>

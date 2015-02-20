@@ -37,7 +37,7 @@ AppAsset::register($this);
                 $menuItems[] = ['label' => Yii::t('frontend','Login'), 'url' => ['/site/login']];
             } else {	
 	            $menuItems = [
-                  ['label' => Yii::t('frontend','Meetings'), 'url' => ['/meeting']],              
+//                  ['label' => Yii::t('frontend','Meetings'), 'url' => ['/meeting']],              
 	                ['label' => Yii::t('frontend','Places'), 'url' => ['/place/yours']],              
 	            ];	
             }

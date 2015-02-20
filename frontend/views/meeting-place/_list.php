@@ -16,14 +16,14 @@ use \kartik\switchinput\SwitchInput;
             if ($mpc->status == $mpc::STATUS_YES)
               $value = 1;
             else
-              $value =0;
-              echo SwitchInput::widget([
-              'type'=>SwitchInput::CHECKBOX,
-              'name' => 'meeting-place-choice',
-              'id'=>'mpc-'.$mpc->id,          
-              'value' => $value,
-              'pluginOptions' => ['size' => 'mini','onText' => '<i class="glyphicon glyphicon-ok"></i>','offText'=>'<i class="glyphicon glyphicon-remove"></i>','onColor' => 'success','offColor' => 'danger',],
-              ]);          
+              $value =0;              
+            echo SwitchInput::widget([
+            'type'=>SwitchInput::CHECKBOX,
+            'name' => 'meeting-place-choice',
+            'id'=>'mpc-'.$mpc->id,          
+            'value' => $value,
+            'pluginOptions' => ['size' => 'mini','onText' => '<i class="glyphicon glyphicon-ok"></i>','offText'=>'<i class="glyphicon glyphicon-remove"></i>','onColor' => 'success','offColor' => 'danger',],
+            ]);          
         }
       }      
       ?>
@@ -39,7 +39,7 @@ use \kartik\switchinput\SwitchInput;
           $value =0;
         else if ($mpc->status == $mpc::STATUS_UNKNOWN)
           $value =-1;
-            echo SwitchInput::widget([
+        echo SwitchInput::widget([
           'type'=>SwitchInput::CHECKBOX,         
           'name' => 'meeting-place-choice',
           'id'=>'mpc-'.$mpc->id,          
@@ -54,8 +54,7 @@ use \kartik\switchinput\SwitchInput;
   }
     ?>
   </td>
-  <td style>
-      
+  <td style>    
       <?
       if ($placeCount>1) {
         if ($model->status == $model::STATUS_SELECTED) {
