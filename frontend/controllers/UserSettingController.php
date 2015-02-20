@@ -40,6 +40,14 @@ class UserSettingController extends Controller
       return $this->redirect(['update', 'id' => $id]);
     }
 
+    public function actionTest()
+    {
+      // returns record id not user_id
+      $id = UserSetting::initialize(Yii::$app->user->getId());
+      echo $id;
+      
+    }
+
     /**
      * Lists all UserSetting models.
      * @return mixed
