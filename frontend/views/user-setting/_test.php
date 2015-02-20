@@ -49,7 +49,8 @@ use kartik\file\FileInput;
              ]);
            } catch (Exception $e) {
                echo 'Caught exception: ',  $e->getMessage(), "\n";
-           }             
+           }
+             
              ?>
            </div> <!-- end of upload photo tab -->
            <div class="form-group">

@@ -38,7 +38,7 @@ use kartik\file\FileInput;
                 </div>
            <div class="tab-pane vertical-pad" id="photo">
 
-             <? /*=$form->field($model, 'image')->widget(FileInput::classname(), [
+             <?php /*=$form->field($model, 'image')->widget(FileInput::classname(), [
                  'options' => ['accept' => 'image/*'],
                   'pluginOptions'=>['allowedFileExtensions'=>['jpg','gif','png']],
              ]);  */ ?>
