@@ -14,5 +14,8 @@ $this->params['breadcrumbs'][] = Yii::t('frontend', 'User Settings');
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-here
+    <?= $this->render('_test', [
+        'model' => $model,
+    ]) ?>
+
 </div>
