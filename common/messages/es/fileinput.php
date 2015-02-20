@@ -17,6 +17,9 @@
 * NOTE: this file must be saved in UTF-8 encoding.
 */
 return [
-    'It is recommended you use an upgraded browser to display the {type} control properly.' => 'Se recomienda que utilice un navegador actualizado para mostrar la {type} controlar adecuadamente .',
-    'Hello, {username}!' => '@@@@',
+    'Browse' => '',
+    'Note:' => '',
+    'Remove' => '',
+    'Upload' => '',
+    'Your browser does not support {validation}. Try an alternative or more recent browser to access these features.' => '',
 ];
