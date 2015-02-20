@@ -43,7 +43,6 @@ use kartik\file\FileInput;
                  'options' => ['accept' => 'image/*'],
                   'pluginOptions'=>['allowedFileExtensions'=>['jpg','gif','png']],
              ]);   
-             echo $test;
            } catch (Exception $e) {
                echo 'Caught exception: ',  $e->getMessage(), "\n";
            }
